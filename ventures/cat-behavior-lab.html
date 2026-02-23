@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cat Behavior Lab — Matt Cretzman</title>
+<meta name="description" content="The Cat Behavior Lab creates research-backed digital guides for cat behavior problems. Founded by Matt Cretzman.">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="/" class="nav-logo">Matt <span>Cretzman</span></a>
+  <ul class="nav-links">
+    <li><a href="/about.html">About</a></li><li><a href="/ventures/" class="active">Ventures</a></li><li><a href="/blog/">Writing</a></li><li><a href="/work-with-me.html" class="nav-cta">Work With Me →</a></li>
+  </ul>
+</nav>
+<div class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="container">
+    <div class="page-eyebrow anim-1"><a href="/ventures/" style="color:var(--accent-orange);text-decoration:none">← Ventures</a></div>
+    <div style="margin-top:20px;margin-bottom:16px" class="anim-2"><span class="badge badge-green" style="margin-right:10px">Active</span><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">DTC — social + DM channels</span></div>
+    <h1 class="page-title anim-3">The Cat<br><em>Behavior Lab</em></h1>
+    <p class="page-sub anim-4">Research-backed digital guides solving specific cat behavior problems — sold through social ads and DM automation. The origin story.</p>
+  </div>
+</div>
+<section class="section fade-in">
+  <div class="container">
+    <div class="section-eyebrow">The Build Story</div>
+    <h2 class="section-title">One of the first products I built<br>end-to-end. <em>All of it.</em></h2>
+    <div class="prose" style="max-width:720px;margin-top:28px">
+      <p>The Cat Behavior Lab was one of my first experiments building a complete digital product end-to-end — not as a client deliverable, not as a feature inside something bigger, but as a standalone thing I conceived, built, and shipped myself.</p>
+      <p>The goal wasn’t just to solve the cat behavior problem. It was to see if I could build a full product cycle: find a real niche, validate it fast, build the content, build the distribution, deploy the automation, and have something live and working. All of it.</p>
+      <p>It’s an early step on the road to becoming a full-stack AI developer. And it worked — which meant I did it again with CigarSnap, then HeyBaddie, then TextEvidence. Each build compounded what I learned from the last one.</p>
+    </div>
+  </div>
+</section>
+<section class="section fade-in">
+  <div class="container">
+    <div class="section-eyebrow">What We Built</div>
+    <h2 class="section-title">Specific guides. Automated distribution.<br><em>High margin.</em></h2>
+    <div class="card-grid-2" style="margin-top:32px">
+      <div class="card card-glow"><h3 style="font-family:var(--font-display);font-size:16px;font-weight:700;margin-bottom:8px">Research-Backed Guides</h3><p style="font-size:14px;color:var(--text-secondary);line-height:1.6">Each guide targets a specific cat behavior problem. Not generic advice — actual solutions that solve the specific thing.</p></div>
+      <div class="card card-glow"><h3 style="font-family:var(--font-display);font-size:16px;font-weight:700;margin-bottom:8px">Automated Distribution</h3><p style="font-size:14px;color:var(--text-secondary);line-height:1.6">Targeted social ads and Instagram DM automation. Low overhead. High margin. Fully automated once deployed.</p></div>
+      <div class="card card-glow"><h3 style="font-family:var(--font-display);font-size:16px;font-weight:700;margin-bottom:8px">DTC Model Validated</h3><p style="font-size:14px;color:var(--text-secondary);line-height:1.6">Live and profitable. The model is replicable across other niche markets — which is exactly how I used it.</p></div>
+      <div class="card card-glow" style="border-left:3px solid var(--accent-orange)"><h3 style="font-family:var(--font-display);font-size:16px;font-weight:700;margin-bottom:8px">The Real Value</h3><p style="font-size:14px;color:var(--text-secondary);line-height:1.6">Learned the whole product cycle — niche validation, content, distribution, automation. CigarSnap, HeyBaddie, and TextEvidence all trace back to what this taught me.</p></div>
+    </div>
+  </div>
+</section>
+<footer class="footer"><div class="container"><div class="footer-inner"><div><a href="/" class="footer-logo">Matt <span>Cretzman</span></a><div class="footer-tagline">Builder. GTM Engineer. AI Systems Architect.</div></div><div class="footer-links"><a href="/about.html">About</a><a href="/ventures/">Ventures</a><a href="/work-with-me.html">Work With Me</a><a href="/blog/">Writing</a></div></div><div class="footer-bottom"><div class="footer-copy">© 2026 Matt Cretzman.</div><div class="footer-copy">Built with Claude, Cursor, and Vercel.</div></div></div></footer>
+<script>const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}}),{threshold:.08,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>20));</script>
+</body>
+</html>
