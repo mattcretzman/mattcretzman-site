@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matt Cretzman — AI Systems Builder | Fractional CMO | Founder</title>
+<meta name="description" content="Matt Cretzman builds autonomous AI agent systems and runs 8 ventures including TextEvidence, Skill Refinery & Stormbreaker Digital.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700;800;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0c;
+    --bg-secondary: #111114;
+    --bg-card: #16161a;
+    --bg-elevated: #1c1c21;
+    --border: #2a2a30;
+    --border-accent: #3d3d45;
+    --text-primary: #e8e6e3;
+    --text-secondary: #94929d;
+    --text-muted: #5c5a66;
+    --accent-orange: #f97316;
+    --accent-orange-dim: #f9731618;
+    --accent-blue: #3b82f6;
+    --accent-green: #22c55e;
+    --font-display: 'Outfit', sans-serif;
+    --font-body: 'Source Serif 4', serif;
+    --font-mono: 'DM Mono', monospace;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 14px;
+    --shadow-card: 0 1px 3px rgba(0,0,0,0.3);
+    --shadow-elevated: 0 4px 20px rgba(0,0,0,0.4);
+    --shadow-glow: 0 4px 20px #f9731640;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: 1.7;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 0 40px;
+    height: 64px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(10, 10, 12, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 700; font-size: 14px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-primary); text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent-orange); }
+  .nav-links {
+    display: flex; gap: 28px; align-items: center;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--font-display);
+    font-size: 13px; font-weight: 500;
+    color: var(--text-muted); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text-primary); }
+  .nav-cta {
+    font-family: var(--font-display);
+    font-size: 13px; font-weight: 600;
+    color: var(--accent-orange) !important;
+    border: 1px solid var(--accent-orange);
+    padding: 6px 16px; border-radius: var(--radius-sm);
+    transition: all 0.2s !important;
+  }
+  .nav-cta:hover {
+    background: var(--accent-orange-dim) !important;
+    box-shadow: var(--shadow-glow);
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav { padding: 0 20px; }
+  }
+
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 40px; }
+  @media (max-width: 768px) { .container { padding: 0 20px; } }
+
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 0 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute;
+    top: 20%; left: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(ellipse, #f9731610 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent-orange);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 28px;
+    opacity: 0; animation: fadeUp 0.6s ease-out 0.1s forwards;
+  }
+  .hero-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--accent-orange); }
+  .hero-headline {
+    font-family: var(--font-display);
+    font-size: clamp(68px, 10vw, 120px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    margin-bottom: 32px;
+    opacity: 0; animation: fadeUp 0.6s ease-out 0.2s forwards;
+  }
+  .hero-headline em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--accent-orange), #fb923c 50%, #fed7aa);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .hero-sub {
+    font-family: var(--font-body);
+    font-size: 19px; color: var(--text-secondary);
+    max-width: 560px; line-height: 1.65;
+    margin-bottom: 44px;
+    opacity: 0; animation: fadeUp 0.6s ease-out 0.3s forwards;
+  }
+  .hero-actions {
+    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.6s ease-out 0.4s forwards;
+  }
+  .btn-primary {
+    font-family: var(--font-display);
+    font-size: 14px; font-weight: 600;
+    color: var(--bg-primary);
+    background: var(--accent-orange);
+    padding: 14px 28px; border-radius: var(--radius-sm);
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: all 0.25s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px #f9731650; }
+  .btn-ghost {
+    font-family: var(--font-display);
+    font-size: 14px; font-weight: 500;
+    color: var(--text-secondary); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--text-primary); }
+
+  .hero-stats {
+    display: flex; gap: 40px; flex-wrap: wrap;
+    margin-top: 72px; padding-top: 40px;
+    border-top: 1px solid var(--border);
+    opacity: 0; animation: fadeUp 0.6s ease-out 0.5s forwards;
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 28px; font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+  }
+  .stat-num span { color: var(--accent-orange); }
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-muted); margin-top: 2px;
+  }
+
+  .section { padding: 100px 0; border-top: 1px solid var(--border); }
+  .section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent-orange);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 16px;
+  }
+  .section-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--accent-orange); }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 800; letter-spacing: -0.02em;
+    line-height: 1.1; margin-bottom: 16px;
+  }
+  .section-title em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--accent-orange), #fb923c);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .section-desc {
+    font-size: 18px; color: var(--text-secondary);
+    max-width: 580px; margin-bottom: 56px; line-height: 1.65;
+  }
+
+  .bio-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+  }
+  @media (max-width: 768px) { .bio-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .bio-text p {
+    color: var(--text-secondary); font-size: 17px; line-height: 1.75;
+    margin-bottom: 20px;
+  }
+  .bio-text p strong { color: var(--text-primary); font-weight: 600; }
+  .bio-text a {
+    color: var(--accent-orange); text-decoration: none;
+    border-bottom: 1px solid #f9731640; transition: border-color 0.2s;
+  }
+  .bio-text a:hover { border-color: var(--accent-orange); }
+  .bio-tag-group { margin-bottom: 32px; }
+  .bio-tag-label {
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 10px;
+  }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-secondary);
+    background: var(--bg-card); border: 1px solid var(--border);
+    padding: 5px 12px; border-radius: var(--radius-sm);
+    letter-spacing: 0.03em;
+  }
+  .tag.orange { color: var(--accent-orange); border-color: #f9731630; background: var(--accent-orange-dim); }
+  .tag.green { color: var(--accent-green); border-color: #22c55e30; background: #22c55e10; }
+  .tag.blue { color: var(--accent-blue); border-color: #3b82f630; background: #3b82f610; }
+
+  .ventures-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  }
+  @media (max-width: 768px) { .ventures-grid { grid-template-columns: 1fr; } }
+  .venture-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-xl); padding: 32px;
+    text-decoration: none; color: inherit;
+    transition: all 0.3s; position: relative; overflow: hidden;
+    display: block;
+  }
+  .venture-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at top left, var(--accent-orange-dim), transparent 60%);
+    opacity: 0; transition: opacity 0.3s; pointer-events: none;
+  }
+  .venture-card:hover { border-color: var(--border-accent); transform: translateY(-2px); box-shadow: var(--shadow-elevated); }
+  .venture-card:hover::before { opacity: 1; }
+  .venture-meta {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .venture-badge {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent-green);
+    background: #22c55e12; border: 1px solid #22c55e25;
+    padding: 3px 10px; border-radius: var(--radius-sm);
+  }
+  .venture-badge.beta { color: var(--accent-orange); background: var(--accent-orange-dim); border-color: #f9731630; }
+  .venture-badge.building { color: var(--accent-blue); background: #3b82f612; border-color: #3b82f630; }
+  .venture-arrow {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--text-muted); transition: color 0.2s, transform 0.2s;
+  }
+  .venture-card:hover .venture-arrow { color: var(--accent-orange); transform: translateX(4px); }
+  .venture-name {
+    font-family: var(--font-display);
+    font-size: 20px; font-weight: 700;
+    letter-spacing: -0.01em; margin-bottom: 8px;
+    color: var(--text-primary);
+  }
+  .venture-desc {
+    font-size: 14px; color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .build-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 768px) { .build-grid { grid-template-columns: 1fr; } }
+  .build-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-xl); padding: 32px;
+  }
+  .build-card-icon {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent-orange);
+    margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+  }
+  .build-card-icon::before { content: ''; width: 16px; height: 1px; background: var(--accent-orange); }
+  .build-card h3 {
+    font-family: var(--font-display); font-size: 18px; font-weight: 700;
+    margin-bottom: 10px; color: var(--text-primary);
+  }
+  .build-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.65; }
+
+  .build-callout {
+    background: var(--bg-elevated); border: 1px solid var(--border-accent);
+    border-left: 3px solid var(--accent-orange);
+    border-radius: var(--radius-lg); padding: 28px 32px;
+  }
+  .build-callout p {
+    font-family: var(--font-body); font-size: 17px; color: var(--text-secondary);
+    line-height: 1.75; font-style: italic;
+  }
+  .build-callout p strong { color: var(--text-primary); font-style: normal; }
+
+  .focus-list { display: flex; flex-direction: column; gap: 16px; }
+  .focus-item {
+    display: flex; gap: 20px; align-items: flex-start;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 20px 24px;
+  }
+  .focus-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent-green);
+    box-shadow: 0 0 8px var(--accent-green);
+    margin-top: 7px; flex-shrink: 0;
+    animation: pulse-green 2s ease-in-out infinite;
+  }
+  @keyframes pulse-green {
+    0%, 100% { box-shadow: 0 0 4px var(--accent-green); }
+    50% { box-shadow: 0 0 12px var(--accent-green), 0 0 20px #22c55e60; }
+  }
+  .focus-name {
+    font-family: var(--font-display); font-size: 14px; font-weight: 700;
+    color: var(--text-primary); margin-bottom: 2px;
+  }
+  .focus-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.55; }
+
+  .writing-block {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-xl); padding: 48px;
+    display: flex; justify-content: space-between; align-items: center; gap: 40px;
+    position: relative; overflow: hidden;
+  }
+  @media (max-width: 768px) { .writing-block { flex-direction: column; align-items: flex-start; padding: 32px; } }
+  .writing-block::before {
+    content: ''; position: absolute; top: 0; right: 0;
+    width: 300px; height: 300px;
+    background: radial-gradient(ellipse at top right, #f9731608, transparent 70%);
+    pointer-events: none;
+  }
+  .writing-left { flex: 1; position: relative; }
+  .writing-left h3 {
+    font-family: var(--font-display); font-size: 24px; font-weight: 800;
+    letter-spacing: -0.01em; margin-bottom: 10px;
+  }
+  .writing-left p { font-size: 16px; color: var(--text-secondary); max-width: 440px; }
+  .writing-right { flex-shrink: 0; position: relative; }
+
+  .footer { padding: 60px 0; border-top: 1px solid var(--border); }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 40px; flex-wrap: wrap;
+  }
+  .footer-logo {
+    font-family: var(--font-display); font-weight: 700; font-size: 15px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--text-primary); text-decoration: none; margin-bottom: 10px; display: block;
+  }
+  .footer-logo span { color: var(--accent-orange); }
+  .footer-tagline { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .footer-links { display: flex; gap: 32px; flex-wrap: wrap; }
+  .footer-links a {
+    font-family: var(--font-display); font-size: 13px; font-weight: 500;
+    color: var(--text-muted); text-decoration: none; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--text-primary); }
+  .footer-bottom {
+    margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-copy { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  .scroll-line {
+    position: absolute; bottom: 40px; left: 40px;
+    display: flex; align-items: center; gap: 12px;
+    opacity: 0; animation: fadeUp 0.6s ease-out 0.8s forwards;
+  }
+  .scroll-line-bar {
+    width: 1px; height: 48px; background: var(--border);
+    position: relative; overflow: hidden;
+  }
+  .scroll-line-bar::after {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 100%; height: 50%;
+    background: var(--accent-orange);
+    animation: scroll-drop 2s ease-in-out infinite;
+  }
+  @keyframes scroll-drop {
+    0% { transform: translateY(-100%); }
+    50% { transform: translateY(100%); }
+    100% { transform: translateY(300%); }
+  }
+  .scroll-line-text {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--text-muted);
+    writing-mode: vertical-rl; text-orientation: mixed;
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="nav-logo">Matt <span>Cretzman</span></a>
+  <ul class="nav-links">
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/ventures/">Ventures</a></li>
+    <li><a href="/blog/">Writing</a></li>
+    <li><a href="/work-with-me.html" class="nav-cta">Work With Me →</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-eyebrow">Entrepreneur · AI Systems Builder · Full-Stack Developer</div>
+    <h1 class="hero-headline">I <em>build</em><br>things.</h1>
+    <p class="hero-sub">AI agent systems. Products. Companies. Eight ventures running simultaneously — each one built faster than the last, because the agents keep getting better.</p>
+    <div class="hero-actions">
+      <a href="/ventures/" class="btn-primary">See what I’m building →</a>
+      <a href="/work-with-me.html" class="btn-ghost">Work with me at Stormbreaker →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-num"><span>8</span></div><div class="stat-label">Active Ventures</div></div>
+      <div class="stat-item"><div class="stat-num"><span>7</span> yrs</div><div class="stat-label">GTM Experience</div></div>
+      <div class="stat-item"><div class="stat-num"><span>696M+</span></div><div class="stat-label">Contacts in LeadStorm</div></div>
+      <div class="stat-item"><div class="stat-num"><span>432</span></div><div class="stat-label">Attorney Outbound (TextEvidence)</div></div>
+      <div class="stat-item"><div class="stat-num"><span>106</span></div><div class="stat-label">Live Webinar Attendees</div></div>
+    </div>
+  </div>
+  <div class="scroll-line">
+    <div class="scroll-line-bar"></div>
+    <span class="scroll-line-text">Scroll</span>
+  </div>
+</section>
+
+<section class="section fade-in">
+  <div class="container">
+    <div class="section-eyebrow">Who I Am</div>
+    <h2 class="section-title">Entrepreneur who learned to <em>code.</em><br>Developer who never forgot GTM.</h2>
+    <div class="bio-grid">
+      <div class="bio-text">
+        <p>I’m Matt Cretzman — entrepreneur, fractional CMO, AI systems builder, and full-stack AI developer. Eight ventures. One stack. Unlimited urgency.</p>
+        <p>Before any of this worked, I cleaned pools, flipped houses, failed at real estate, and tried insurance. From 2016 to 2019, nothing stuck — and I had two kids watching. In 2019, I met Brad, the founder of a marketing agency in Keller, who gave me a hand up at the right moment. That conversation changed everything.</p>
+        <p>In January 2020, I launched <strong>Stormbreaker Digital</strong>. What started as a LinkedIn growth agency became something I couldn’t have predicted: an AI agent systems company. Then I became something I also couldn’t have predicted: a full-stack developer.</p>
+        <p>I’m a Claude power user — Claude Code, Claude Projects, custom Connectors, AI Skills. I build in Cursor, deploy on Vercel, and orchestrate everything through OpenClaw. I went from marketer to someone who ships PWAs, Zoom apps, and mobile apps without a dev team. Each venture built faster than the one before, because the stack keeps getting sharper.</p>
+        <p>I also wrote <a href="/blog/">a book on LinkedIn with Tony Jeary</a>. Named a children’s home after my daughter Azlynn. Some things you build for business. Some things you build because you have to.</p>
+        <a href="/about.html" class="btn-ghost" style="margin-top: 8px;">Read the full story →</a>
+      </div>
+      <div class="bio-sidebar">
+        <div class="bio-tag-group">
+          <div class="bio-tag-label">AI Stack</div>
+          <div class="tag-row"><span class="tag orange">Claude Code</span><span class="tag orange">Claude Projects</span><span class="tag orange">Custom Connectors</span><span class="tag orange">AI Skills</span><span class="tag orange">OpenClaw</span></div>
+        </div>
+        <div class="bio-tag-group">
+          <div class="bio-tag-label">Dev Tools</div>
+          <div class="tag-row"><span class="tag blue">Cursor</span><span class="tag blue">GitHub</span><span class="tag blue">Vercel</span><span class="tag blue">Framer</span></div>
+        </div>
+        <div class="bio-tag-group">
+          <div class="bio-tag-label">GTM & Outbound</div>
+          <div class="tag-row"><span class="tag green">LinkedIn Specialist</span><span class="tag green">LeadStorm AI</span><span class="tag green">Clay</span><span class="tag green">HubSpot</span><span class="tag green">7 Yrs GTM</span></div>
+        </div>
+        <div class="bio-tag-group">
+          <div class="bio-tag-label">Background</div>
+          <div class="tag-row"><span class="tag">Entrepreneur</span><span class="tag">Fractional CMO</span><span class="tag">Author</span><span class="tag">Speaker</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section fade-in">
+  <div class="container">
+    <div class="section-eyebrow">Portfolio</div>
+    <h2 class="section-title">What I’m building</h2>
+    <p class="section-desc">Eight ventures. One through-line — AI agent systems applied to a real problem in a real market.</p>
+    <div class="ventures-grid">
+      <a href="/ventures/stormbreaker-digital.html" class="venture-card">
+        <div class="venture-meta"><span class="venture-badge">Active</span><span class="venture-arrow">→</span></div>
+        <div class="venture-name">Stormbreaker Digital</div>
+        <div class="venture-desc">AI agent systems that autonomously run marketing, sales, and operations for B2B companies — built on OpenClaw, connecting MCP, APIs, and every tool in the stack.</div>
+      </a>
+      <a href="/ventures/textevidence.html" class="venture-card">
+        <div class="venture-meta"><span class="venture-badge beta">Beta</span><span class="venture-arrow">→</span></div>
+        <div class="venture-name">TextEvidence</div>
+        <div class="venture-desc">AI platform that helps family law attorneys organize text message screenshots into court-ready, line-numbered exhibits with pattern analysis.</div>
+      </a>
+      <a href="/ventures/skill-refinery.html" class="venture-card">
+        <div class="venture-meta"><span class="venture-badge building">Building</span><span class="venture-arrow">→</span></div>
+        <div class="venture-name">Skill Refinery</div>
+        <div class="venture-desc">The first platform converting expert IP — books, courses, frameworks — into AI-native skill cards delivered through Claude, ChatGPT, and Copilot via MCP.</div>
+      </a>
+      <a href="/ventures/cigarsnap.html" class="venture-card">
+        <div class="venture-meta"><span class="venture-badge">Active</span><span class="venture-arrow">→</span></div>
+        <div class="venture-name">CigarSnap</div>
+        <div class="venture-desc">AI image recognition that identifies cigars from photos, manages digital humidors, tracks experiences, and connects enthusiasts to their favorite lounges.</div>
+      </a>
+      <a href="/ventures/heybaddie.html" class="venture-card">
+        <div class="venture-meta"><span class="venture-badge building">Building</span><span class="venture-arrow">→</span></div>
+        <div class="venture-name">HeyBaddie</div>
+        <div class="venture-desc">AI-powered study companion for homeschool students — personalized coaching, gamification rewarding real progress, and real-time school data integration via Clever.</div>
+      </a>
+      <a href="/ventures/myprq.html" class="venture-card">
+        <div class="venture-meta"><span class="venture-badge">Active</span><span class="venture-arrow">→</span></div>
+        <div class="venture-name">MyPRQ</div>
+        <div class="venture-desc">Parliamentary Recognition Queue — SaaS for managing speaker queues in formal meetings, built with the co-author of the standard used by 23M North American organizations.</div>
+      </a>
+      <a href="/ventures/leadstorm-ai.html" class="venture-card">
+        <div class="venture-meta"><span class="venture-badge">Active</span><span class="venture-arrow">→</span></div>
+        <div class="venture-name">LeadStorm AI</div>
+        <div class="venture-desc">AI-powered B2B lead generation with 696M+ contacts, automated prospecting, qualification, and multi-channel outreach sequences. Built because existing tools didn’t work.</div>
+      </a>
+      <a href="/ventures/cat-behavior-lab.html" class="venture-card">
+        <div class="venture-meta"><span class="venture-badge">Active</span><span class="venture-arrow">→</span></div>
+        <div class="venture-name">The Cat Behavior Lab</div>
+        <div class="venture-desc">Research-backed digital guides for specific cat behavior problems — sold via social ads and DM automation. The full-stack AI developer origin story.</div>
+      </a>
+    </div>
+    <div style="margin-top: 32px;"><a href="/ventures/" class="btn-ghost">See all ventures with full build stories →</a></div>
+  </div>
+</section>
+
+<section class="section fade-in">
+  <div class="container">
+    <div class="section-eyebrow">Method</div>
+    <h2 class="section-title">How I build</h2>
+    <p class="section-desc">Seven years of GTM experience in the trenches. Then AI unlocked something I didn’t see coming.</p>
+    <div class="build-grid">
+      <div class="build-card"><div class="build-card-icon">Claude</div><h3>The Engine</h3><p>Claude Code for production apps. Claude Projects across every venture. Custom Connectors — I’ve built my own. AI Skills were the original inspiration behind Skill Refinery. I push Claude further than most people know is possible.</p></div>
+      <div class="build-card"><div class="build-card-icon">Cursor + Vercel</div><h3>Write & Ship</h3><p>Cursor is where code gets written. Vercel is where it deploys — dozens of live PWAs, Zoom apps, mobile apps, blogs, and SaaS tools. Full-stack without a dev team and without a CS degree.</p></div>
+      <div class="build-card"><div class="build-card-icon">OpenClaw</div><h3>The Middleware</h3><p>OpenClaw connects Claude, MCP, APIs, and every external tool into autonomous agent systems. Researchers, writers, SDRs, publishers, analysts — each runs on a schedule, feeds the next, compounds over time.</p></div>
+      <div class="build-card"><div class="build-card-icon">7 Years GTM</div><h3>The Foundation</h3><p>Before the AI stack existed, I was doing the work manually — outbound, LinkedIn campaigns, positioning, pipeline. That’s what makes the systems actually convert. You can’t automate a motion you don’t understand.</p></div>
+    </div>
+    <div class="build-callout">
+      <p>“What makes this unusual: <strong>I see software with a business owner’s eyes.</strong> I know which features move revenue. I know what copy should say before I write the UI that displays it. Most developers don’t think like that. Most marketers can’t build what they’re thinking. I do both — and I move with the speed and urgency of someone whose livelihood depends on shipping. Because it does.”</p>
+    </div>
+  </div>
+</section>
+
+<section class="section fade-in">
+  <div class="container">
+    <div class="section-eyebrow">Live Now</div>
+    <h2 class="section-title">What’s happening <em>right now</em></h2>
+    <p class="section-desc">Real-time status across the portfolio.</p>
+    <div class="focus-list">
+      <div class="focus-item"><div class="focus-dot"></div><div><div class="focus-name">Stormbreaker Digital</div><div class="focus-desc">Active client engagements in defense contracting, healthcare, air freight, and manufacturing. Deploying full autonomous marketing and sales agent stacks.</div></div></div>
+      <div class="focus-item"><div class="focus-dot"></div><div><div class="focus-name">TextEvidence</div><div class="focus-desc">Launching to Texas family law attorneys. Live AI SDR outreach campaign running — 432 attorneys in active sequence.</div></div></div>
+      <div class="focus-item"><div class="focus-dot"></div><div><div class="focus-name">Skill Refinery</div><div class="focus-desc">Building creator storefronts and MCP integrations for Claude, ChatGPT, and Copilot. Marketplace submissions in process.</div></div></div>
+      <div class="focus-item"><div class="focus-dot"></div><div><div class="focus-name">HeyBaddie</div><div class="focus-desc">Expanding school data integrations via Clever. Parent dashboard and gamification layer in active development.</div></div></div>
+      <div class="focus-item"><div class="focus-dot"></div><div><div class="focus-name">LeadStorm AI</div><div class="focus-desc">696M+ contacts in the database. Actively powering outbound campaigns for all Stormbreaker client engagements.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section fade-in">
+  <div class="container">
+    <div class="writing-block">
+      <div class="writing-left">
+        <div class="section-eyebrow" style="margin-bottom: 14px;">Writing</div>
+        <h3>I write about building in public.</h3>
+        <p>AI agent systems, GTM engineering, what it actually takes to run autonomous infrastructure at scale — and what I’m learning in real time across eight ventures.</p>
+        <a href="/blog/" class="btn-ghost" style="margin-top: 20px; display: inline-flex;">Read the blog →</a>
+      </div>
+      <div class="writing-right">
+        <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 28px; min-width: 240px;">
+          <div style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px;">Also available</div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <a href="/blog/" style="font-family: var(--font-display); font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.2s;"><span style="color: var(--accent-orange)">→</span> The LinkedIn Advantage (Book)</a>
+            <a href="/about.html" style="font-family: var(--font-display); font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.2s;"><span style="color: var(--accent-orange)">→</span> Podcast Appearances</a>
+            <a href="/about.html" style="font-family: var(--font-display); font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.2s;"><span style="color: var(--accent-orange)">→</span> Speaking</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div><a href="/" class="footer-logo">Matt <span>Cretzman</span></a><div class="footer-tagline">Builder. GTM Engineer. AI Systems Architect.</div></div>
+      <div class="footer-links"><a href="/about.html">About</a><a href="/ventures/">Ventures</a><a href="/work-with-me.html">Work With Me</a><a href="/blog/">Writing</a><a href="https://stormbreakerdigital.com">Stormbreaker Digital</a><a href="https://linkedin.com/in/mattcretzman">LinkedIn</a></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2026 Matt Cretzman. All rights reserved.</div><div class="footer-copy">Built with Claude, Cursor, and Vercel.</div></div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  const nav = document.querySelector('.nav');
+  window.addEventListener('scroll', () => {
+    nav.style.background = window.scrollY > 20 ? 'rgba(10, 10, 12, 0.96)' : 'rgba(10, 10, 12, 0.85)';
+  });
+</script>
+</body>
+</html>
