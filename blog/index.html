@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing — Matt Cretzman</title>
+<meta name="description" content="Writing on AI agent systems, autonomous infrastructure, LinkedIn, outbound, and what running eight ventures simultaneously actually looks like.">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="/" class="nav-logo">Matt <span>Cretzman</span></a>
+  <ul class="nav-links">
+    <li><a href="/about.html">About</a></li><li><a href="/ventures/">Ventures</a></li><li><a href="/blog/" class="active">Writing</a></li><li><a href="/work-with-me.html" class="nav-cta">Work With Me →</a></li>
+  </ul>
+</nav>
+<div class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="container">
+    <div class="page-eyebrow anim-1">Writing</div>
+    <h1 class="page-title anim-2">I write about<br><em>building in public.</em></h1>
+    <p class="page-sub anim-3">AI agent systems, autonomous infrastructure, LinkedIn and outbound, and what running eight ventures simultaneously actually looks like. No fluff. No thought leadership theater.</p>
+  </div>
+</div>
+
+<section style="padding:80px 0">
+  <div class="container">
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px">
+      <button onclick="filterPosts('all')" id="filter-all" style="font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 16px;border-radius:4px;border:1px solid var(--accent-orange);color:var(--accent-orange);background:var(--accent-orange-dim);cursor:pointer;transition:all .2s">All</button>
+      <button onclick="filterPosts('ai-systems')" style="font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 16px;border-radius:4px;border:1px solid var(--border);color:var(--text-muted);background:none;cursor:pointer;transition:all .2s">AI Systems</button>
+      <button onclick="filterPosts('build-stories')" style="font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 16px;border-radius:4px;border:1px solid var(--border);color:var(--text-muted);background:none;cursor:pointer;transition:all .2s">Build Stories</button>
+      <button onclick="filterPosts('linkedin')" style="font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 16px;border-radius:4px;border:1px solid var(--border);color:var(--text-muted);background:none;cursor:pointer;transition:all .2s">LinkedIn & Outbound</button>
+      <button onclick="filterPosts('fractional-cmo')" style="font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 16px;border-radius:4px;border:1px solid var(--border);color:var(--text-muted);background:none;cursor:pointer;transition:all .2s">Fractional CMO</button>
+    </div>
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-xl);padding:44px;margin-bottom:24px;position:relative;overflow:hidden" class="post-item" data-category="ai-systems">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at top left,#f9731610,transparent 50%);pointer-events:none"></div>
+      <div style="position:relative">
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px"><span class="badge badge-orange">AI Systems</span><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">Featured</span></div>
+        <h2 style="font-family:var(--font-display);font-size:26px;font-weight:800;letter-spacing:-.02em;margin-bottom:10px;line-height:1.2">How I Run Eight Ventures Simultaneously Without a Team</h2>
+        <p style="font-size:15px;color:var(--text-secondary);margin-bottom:20px;max-width:620px;line-height:1.65">The actual infrastructure — Claude Projects, OpenClaw, cron schedules, and the skill architecture that makes autonomous operations possible without full-time headcount.</p>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+          <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">February 2026 · 12 min read</div>
+          <a href="#" style="font-family:var(--font-display);font-size:13px;font-weight:600;color:var(--accent-orange);text-decoration:none;display:flex;align-items:center;gap:6px">Read →</a>
+        </div>
+      </div>
+    </div>
+    <div class="card-grid-2" id="post-grid">
+      <div class="card post-item" data-category="build-stories"><span class="badge badge-blue" style="margin-bottom:14px;display:inline-block">Build Stories</span><h3 style="font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:8px;line-height:1.3">CigarSnap: From $1.08 Reddit Scrape to Live App in 48 Hours</h3><p style="font-size:14px;color:var(--text-secondary);line-height:1.6;margin-bottom:16px">How three parallel Claude Code sessions shipped 15 features and turned a Reddit audience into real users.</p><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">Jan 2026 · 8 min</div><a href="#" style="font-family:var(--font-display);font-size:12px;font-weight:600;color:var(--accent-orange);text-decoration:none">Read →</a></div></div>
+      <div class="card post-item" data-category="ai-systems"><span class="badge badge-orange" style="margin-bottom:14px;display:inline-block">AI Systems</span><h3 style="font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:8px;line-height:1.3">OpenClaw: The Middleware That Ties the Stack Together</h3><p style="font-size:14px;color:var(--text-secondary);line-height:1.6;margin-bottom:16px">What OpenClaw actually does, why I built it, and how it connects Claude, MCP, and every external tool into autonomous agent systems.</p><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">Jan 2026 · 10 min</div><a href="#" style="font-family:var(--font-display);font-size:12px;font-weight:600;color:var(--accent-orange);text-decoration:none">Read →</a></div></div>
+      <div class="card post-item" data-category="linkedin"><span class="badge badge-green" style="margin-bottom:14px;display:inline-block">LinkedIn & Outbound</span><h3 style="font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:8px;line-height:1.3">The Delightful Outbound Approach: Why You Don’t Pitch Until Touch 3</h3><p style="font-size:14px;color:var(--text-secondary);line-height:1.6;margin-bottom:16px">Seven years of outbound compressed into one methodology. 5 touches, 23 days, earn the right before you ask.</p><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">Dec 2025 · 7 min</div><a href="#" style="font-family:var(--font-display);font-size:12px;font-weight:600;color:var(--accent-orange);text-decoration:none">Read →</a></div></div>
+      <div class="card post-item" data-category="build-stories"><span class="badge badge-blue" style="margin-bottom:14px;display:inline-block">Build Stories</span><h3 style="font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:8px;line-height:1.3">TextEvidence: I Shipped a Legal Tech Platform Because I Couldn’t Stop Thinking About It</h3><p style="font-size:14px;color:var(--text-secondary);line-height:1.6;margin-bottom:16px">3,000 screenshots. One week of paralegals. Here’s how that problem turned into a beta product with 432 attorneys in active outbound.</p><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">Dec 2025 · 9 min</div><a href="#" style="font-family:var(--font-display);font-size:12px;font-weight:600;color:var(--accent-orange);text-decoration:none">Read →</a></div></div>
+      <div class="card post-item" data-category="ai-systems"><span class="badge badge-orange" style="margin-bottom:14px;display:inline-block">AI Systems</span><h3 style="font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:8px;line-height:1.3">What “Claude Power User” Actually Means in 2026</h3><p style="font-size:14px;color:var(--text-secondary);line-height:1.6;margin-bottom:16px">Not the interface. Not the prompts. Claude Code, Projects, custom Connectors, AI Skills, and the architecture decisions that make it a build engine.</p><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">Nov 2025 · 11 min</div><a href="#" style="font-family:var(--font-display);font-size:12px;font-weight:600;color:var(--accent-orange);text-decoration:none">Read →</a></div></div>
+      <div class="card post-item" data-category="fractional-cmo"><span class="badge" style="margin-bottom:14px;display:inline-block;color:var(--accent-purple);background:var(--accent-purple-dim);border:1px solid #a855f730">Fractional CMO</span><h3 style="font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:8px;line-height:1.3">The Webinar That Generated Multi-Million Dollar Pipeline (Zero Paid Ads)</h3><p style="font-size:14px;color:var(--text-secondary);line-height:1.6;margin-bottom:16px">191 registrants, 106 live attendees, 55% attendance rate. Here’s the exact system — AI SDR, content engine, follow-up sequence.</p><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">Nov 2025 · 8 min</div><a href="#" style="font-family:var(--font-display);font-size:12px;font-weight:600;color:var(--accent-orange);text-decoration:none">Read →</a></div></div>
+    </div>
+    <div style="margin-top:60px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-xl);padding:44px;text-align:center;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,#f9731608,transparent 60%);pointer-events:none"></div>
+      <div style="position:relative">
+        <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent-orange);margin-bottom:16px">Newsletter</div>
+        <h2 style="font-family:var(--font-display);font-size:28px;font-weight:800;margin-bottom:10px">Stay close to the build.</h2>
+        <p style="color:var(--text-secondary);margin-bottom:28px;max-width:440px;margin-left:auto;margin-right:auto">New posts, build updates, and the frameworks I’m developing — delivered direct.</p>
+        <a href="https://linkedin.com/in/mattcretzman" target="_blank" class="btn-primary">Follow on LinkedIn →</a>
+      </div>
+    </div>
+    <div style="margin-top:32px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-xl);padding:36px;display:flex;gap:32px;align-items:center;flex-wrap:wrap">
+      <div>
+        <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px">Book</div>
+        <h3 style="font-family:var(--font-display);font-size:20px;font-weight:700;margin-bottom:8px">The LinkedIn Advantage</h3>
+        <p style="font-size:14px;color:var(--text-secondary);line-height:1.6;max-width:480px;margin-bottom:16px">Co-authored with Tony Jeary. Covers the BCT Method (Brand, Content, Traffic), the LinkedIn Power Score™, and the frameworks behind seven years of real campaigns.</p>
+        <a href="#" class="btn-outline">Get the Book →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="container"><div class="footer-inner"><div><a href="/" class="footer-logo">Matt <span>Cretzman</span></a><div class="footer-tagline">Builder. GTM Engineer. AI Systems Architect.</div></div><div class="footer-links"><a href="/about.html">About</a><a href="/ventures/">Ventures</a><a href="/work-with-me.html">Work With Me</a><a href="/blog/">Writing</a><a href="https://linkedin.com/in/mattcretzman">LinkedIn</a></div></div><div class="footer-bottom"><div class="footer-copy">© 2026 Matt Cretzman.</div><div class="footer-copy">Built with Claude, Cursor, and Vercel.</div></div></div></footer>
+<script>
+  window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>20));
+  function filterPosts(cat) {
+    document.querySelectorAll('button[onclick]').forEach(b => { b.style.borderColor='var(--border)'; b.style.color='var(--text-muted)'; b.style.background='none'; });
+    event.target.style.borderColor='var(--accent-orange)'; event.target.style.color='var(--accent-orange)'; event.target.style.background='var(--accent-orange-dim)';
+    document.querySelectorAll('.post-item').forEach(p => { p.style.display = (cat === 'all' || p.dataset.category === cat) ? '' : 'none'; });
+  }
+</script>
+</body>
+</html>
