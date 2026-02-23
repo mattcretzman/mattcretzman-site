@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CigarSnap — Matt Cretzman</title>
+<meta name="description" content="CigarSnap uses AI image recognition to identify cigars and manage digital humidors. Founded by Matt Cretzman.">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="/" class="nav-logo">Matt <span>Cretzman</span></a>
+  <ul class="nav-links">
+    <li><a href="/about.html">About</a></li><li><a href="/ventures/" class="active">Ventures</a></li><li><a href="/blog/">Writing</a></li><li><a href="/work-with-me.html" class="nav-cta">Work With Me →</a></li>
+  </ul>
+</nav>
+<div class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="container">
+    <div class="page-eyebrow anim-1"><a href="/ventures/" style="color:var(--accent-orange);text-decoration:none">← Ventures</a></div>
+    <div style="margin-top:20px;margin-bottom:16px" class="anim-2"><span class="badge badge-green" style="margin-right:10px">Active</span><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">cigarsnap.app</span></div>
+    <h1 class="page-title anim-3">Cigar<em>Snap</em></h1>
+    <p class="page-sub anim-4">AI image recognition that identifies cigars from photos, manages digital humidors, tracks experiences, and connects enthusiasts to lounges.</p>
+    <div style="margin-top:32px" class="anim-5"><a href="https://cigarsnap.app" target="_blank" class="btn-outline">Visit cigarsnap.app →</a></div>
+  </div>
+</div>
+<section class="section fade-in">
+  <div class="container">
+    <div class="section-eyebrow">The Build Story</div>
+    <h2 class="section-title">$1.08 in market research.<br>3,522 <em>validated users.</em></h2>
+    <div class="prose" style="max-width:720px;margin-top:28px">
+      <p>I scraped 3,522 cigar enthusiasts from Reddit for a dollar and eight cents. They were already talking about wanting exactly what I was thinking about building — an app that could identify a cigar from a photo without having to type the name or hunt for the band.</p>
+      <p>Market validation doesn’t have to be expensive. It has to be real.</p>
+      <p>The first 15 features shipped in 48 hours using three parallel Claude Code sessions. That Reddit audience became the first users.</p>
+    </div>
+  </div>
+</section>
+<section class="section fade-in">
+  <div class="container">
+    <div class="section-eyebrow">What We Built</div>
+    <h2 class="section-title">Point. Snap. <em>Know.</em></h2>
+    <div class="card-grid-2" style="margin-top:32px">
+      <div class="card card-glow"><h3 style="font-family:var(--font-display);font-size:16px;font-weight:700;margin-bottom:8px">AI Cigar Identification</h3><p style="font-size:14px;color:var(--text-secondary);line-height:1.6">Point your camera at a cigar — the AI identifies the blend, wrapper, country of origin, and manufacturer instantly.</p></div>
+      <div class="card card-glow"><h3 style="font-family:var(--font-display);font-size:16px;font-weight:700;margin-bottom:8px">Digital Humidor</h3><p style="font-size:14px;color:var(--text-secondary);line-height:1.6">Log and manage your collection. Rate experiences. Track what you’ve smoked and what you want to smoke next.</p></div>
+      <div class="card card-glow"><h3 style="font-family:var(--font-display);font-size:16px;font-weight:700;margin-bottom:8px">Lounge Finder</h3><p style="font-size:14px;color:var(--text-secondary);line-height:1.6">Find cigar lounges near you. Connect with other enthusiasts in the community.</p></div>
+      <div class="card card-glow"><h3 style="font-family:var(--font-display);font-size:16px;font-weight:700;margin-bottom:8px">Speed of Build</h3><p style="font-size:14px;color:var(--text-secondary);line-height:1.6">15 features in 48 hours. Three parallel Claude Code sessions. This is what the stack makes possible.</p></div>
+    </div>
+  </div>
+</section>
+<footer class="footer"><div class="container"><div class="footer-inner"><div><a href="/" class="footer-logo">Matt <span>Cretzman</span></a><div class="footer-tagline">Builder. GTM Engineer. AI Systems Architect.</div></div><div class="footer-links"><a href="/about.html">About</a><a href="/ventures/">Ventures</a><a href="/work-with-me.html">Work With Me</a><a href="/blog/">Writing</a></div></div><div class="footer-bottom"><div class="footer-copy">© 2026 Matt Cretzman.</div><div class="footer-copy">Built with Claude, Cursor, and Vercel.</div></div></div></footer>
+<script>const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}}),{threshold:.08,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>20));</script>
+</body>
+</html>
