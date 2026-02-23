@@ -1,0 +1,1 @@
+{\n  "cleanUrls": true,\n  "trailingSlash": false,\n  "rewrites": [\n    { "source": "/ventures", "destination": "/ventures/index.html" },\n    { "source": "/blog", "destination": "/blog/index.html" }\n  ]\n}\n
