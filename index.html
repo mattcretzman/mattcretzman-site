@@ -167,23 +167,44 @@
   }
   .btn-ghost:hover { color: var(--text-primary); }
 
-  .hero-stats {
-    display: flex; gap: 40px; flex-wrap: wrap;
+  .hero-quotes {
     margin-top: 72px; padding-top: 40px;
     border-top: 1px solid var(--border);
     opacity: 0; animation: fadeUp 0.6s ease-out 0.5s forwards;
   }
-  .stat-num {
-    font-family: var(--font-display);
-    font-size: 28px; font-weight: 800;
-    color: var(--text-primary);
-    letter-spacing: -0.02em;
-  }
-  .stat-num span { color: var(--accent-orange); }
-  .stat-label {
+  .hero-quotes-label {
     font-family: var(--font-mono);
-    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--text-muted); margin-top: 2px;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 24px;
+  }
+  .quote-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;
+  }
+  @media (max-width: 900px) { .quote-grid { grid-template-columns: 1fr; } }
+  .quote-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-left: 3px solid var(--accent-orange);
+    border-radius: var(--radius-lg); padding: 28px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .quote-text {
+    font-family: var(--font-body);
+    font-size: 15px; line-height: 1.75;
+    color: var(--text-primary); font-style: italic;
+    margin-bottom: 20px;
+  }
+  .quote-mark {
+    color: var(--accent-orange); font-style: normal;
+    font-size: 22px; line-height: 0; vertical-align: -6px; margin-right: 3px;
+  }
+  .quote-attribution { display: flex; flex-direction: column; gap: 3px; }
+  .quote-name {
+    font-family: var(--font-display); font-size: 13px; font-weight: 700;
+    color: var(--text-primary);
+  }
+  .quote-role {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em;
+    color: var(--text-muted); text-transform: uppercase;
   }
 
   .section { padding: 100px 0; border-top: 1px solid var(--border); }
@@ -443,15 +464,34 @@
     <h1 class="hero-headline">I <em>build</em><br>things.</h1>
     <p class="hero-sub">AI agent systems. Products. Companies. Eight ventures running simultaneously — each one built faster than the last, because the agents keep getting better.</p>
     <div class="hero-actions">
-      <a href="/ventures/" class="btn-primary">See what I’m building →</a>
+      <a href="/ventures/" class="btn-primary">See what I'm building →</a>
       <a href="/work-with-me.html" class="btn-ghost">Work with me at Stormbreaker →</a>
     </div>
-    <div class="hero-stats">
-      <div class="stat-item"><div class="stat-num"><span>8</span></div><div class="stat-label">Active Ventures</div></div>
-      <div class="stat-item"><div class="stat-num"><span>7</span> yrs</div><div class="stat-label">GTM Experience</div></div>
-      <div class="stat-item"><div class="stat-num"><span>696M+</span></div><div class="stat-label">Contacts in LeadStorm</div></div>
-      <div class="stat-item"><div class="stat-num"><span>432</span></div><div class="stat-label">Attorney Outbound (TextEvidence)</div></div>
-      <div class="stat-item"><div class="stat-num"><span>106</span></div><div class="stat-label">Live Webinar Attendees</div></div>
+    <div class="hero-quotes">
+      <div class="hero-quotes-label">The world's biggest builders see what's already here</div>
+      <div class="quote-grid">
+        <div class="quote-card">
+          <div class="quote-text"><span class="quote-mark">"</span>AI agents are the new digital workforce. The IT department of every company is going to be the HR department of AI agents in the future."</div>
+          <div class="quote-attribution">
+            <div class="quote-name">Jensen Huang</div>
+            <div class="quote-role">CEO, Nvidia — CES 2025</div>
+          </div>
+        </div>
+        <div class="quote-card">
+          <div class="quote-text"><span class="quote-mark">"</span>We believe that, in 2025, we may see the first AI agents join the workforce and materially change the output of companies."</div>
+          <div class="quote-attribution">
+            <div class="quote-name">Sam Altman</div>
+            <div class="quote-role">CEO, OpenAI — January 2025</div>
+          </div>
+        </div>
+        <div class="quote-card">
+          <div class="quote-text"><span class="quote-mark">"</span>We are the last generation to manage only humans. From this point forward, we will be managing not only human workers but also digital workers."</div>
+          <div class="quote-attribution">
+            <div class="quote-name">Marc Benioff</div>
+            <div class="quote-role">CEO, Salesforce — Davos &amp; Earnings Call 2025</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="scroll-line">
@@ -466,11 +506,11 @@
     <h2 class="section-title">Entrepreneur who learned to <em>code.</em><br>Developer who never forgot GTM.</h2>
     <div class="bio-grid">
       <div class="bio-text">
-        <p>I’m Matt Cretzman — entrepreneur, fractional CMO, AI systems builder, and full-stack AI developer. Eight ventures. One stack. Unlimited urgency.</p>
+        <p>I'm Matt Cretzman — entrepreneur, fractional CMO, AI systems builder, and full-stack AI developer. Eight ventures. One stack. Unlimited urgency.</p>
         <p>Before any of this worked, I cleaned pools, flipped houses, failed at real estate, and tried insurance. From 2016 to 2019, nothing stuck — and I had two kids watching. In 2019, I met Brad, the founder of a marketing agency in Keller, who gave me a hand up at the right moment. That conversation changed everything.</p>
-        <p>In January 2020, I launched <strong>Stormbreaker Digital</strong>. What started as a LinkedIn growth agency became something I couldn’t have predicted: an AI agent systems company. Then I became something I also couldn’t have predicted: a full-stack developer.</p>
-        <p>I’m a Claude power user — Claude Code, Claude Projects, custom Connectors, AI Skills. I build in Cursor, deploy on Vercel, and orchestrate everything through OpenClaw. I went from marketer to someone who ships PWAs, Zoom apps, and mobile apps without a dev team. Each venture built faster than the one before, because the stack keeps getting sharper.</p>
-        <p>I also wrote <a href="/blog/">a book on LinkedIn with Tony Jeary</a>. Named a children’s home after my daughter Azlynn. Some things you build for business. Some things you build because you have to.</p>
+        <p>In January 2020, I launched <strong>Stormbreaker Digital</strong>. What started as a LinkedIn growth agency became something I couldn't have predicted: an AI agent systems company. Then I became something I also couldn't have predicted: a full-stack developer.</p>
+        <p>I'm a Claude power user — Claude Code, Claude Projects, custom Connectors, AI Skills. I build in Cursor, deploy on Vercel, and orchestrate everything through OpenClaw. I went from marketer to someone who ships PWAs, Zoom apps, and mobile apps without a dev team. Each venture built faster than the one before, because the stack keeps getting sharper.</p>
+        <p>I also wrote <a href="/blog/">a book on LinkedIn with Tony Jeary</a>. Named a children's home after my daughter Azlynn. Some things you build for business. Some things you build because you have to.</p>
         <a href="/about.html" class="btn-ghost" style="margin-top: 8px;">Read the full story →</a>
       </div>
       <div class="bio-sidebar">
@@ -498,7 +538,7 @@
 <section class="section fade-in">
   <div class="container">
     <div class="section-eyebrow">Portfolio</div>
-    <h2 class="section-title">What I’m building</h2>
+    <h2 class="section-title">What I'm building</h2>
     <p class="section-desc">Eight ventures. One through-line — AI agent systems applied to a real problem in a real market.</p>
     <div class="ventures-grid">
       <a href="/ventures/stormbreaker-digital.html" class="venture-card">
@@ -534,7 +574,7 @@
       <a href="/ventures/leadstorm-ai.html" class="venture-card">
         <div class="venture-meta"><span class="venture-badge">Active</span><span class="venture-arrow">→</span></div>
         <div class="venture-name">LeadStorm AI</div>
-        <div class="venture-desc">AI-powered B2B lead generation with 696M+ contacts, automated prospecting, qualification, and multi-channel outreach sequences. Built because existing tools didn’t work.</div>
+        <div class="venture-desc">AI-powered B2B lead generation with 696M+ contacts, automated prospecting, qualification, and multi-channel outreach sequences. Built because existing tools didn't work.</div>
       </a>
       <a href="/ventures/cat-behavior-lab.html" class="venture-card">
         <div class="venture-meta"><span class="venture-badge">Active</span><span class="venture-arrow">→</span></div>
@@ -550,15 +590,15 @@
   <div class="container">
     <div class="section-eyebrow">Method</div>
     <h2 class="section-title">How I build</h2>
-    <p class="section-desc">Seven years of GTM experience in the trenches. Then AI unlocked something I didn’t see coming.</p>
+    <p class="section-desc">Seven years of GTM experience in the trenches. Then AI unlocked something I didn't see coming.</p>
     <div class="build-grid">
-      <div class="build-card"><div class="build-card-icon">Claude</div><h3>The Engine</h3><p>Claude Code for production apps. Claude Projects across every venture. Custom Connectors — I’ve built my own. AI Skills were the original inspiration behind Skill Refinery. I push Claude further than most people know is possible.</p></div>
+      <div class="build-card"><div class="build-card-icon">Claude</div><h3>The Engine</h3><p>Claude Code for production apps. Claude Projects across every venture. Custom Connectors — I've built my own. AI Skills were the original inspiration behind Skill Refinery. I push Claude further than most people know is possible.</p></div>
       <div class="build-card"><div class="build-card-icon">Cursor + Vercel</div><h3>Write & Ship</h3><p>Cursor is where code gets written. Vercel is where it deploys — dozens of live PWAs, Zoom apps, mobile apps, blogs, and SaaS tools. Full-stack without a dev team and without a CS degree.</p></div>
       <div class="build-card"><div class="build-card-icon">OpenClaw</div><h3>The Middleware</h3><p>OpenClaw connects Claude, MCP, APIs, and every external tool into autonomous agent systems. Researchers, writers, SDRs, publishers, analysts — each runs on a schedule, feeds the next, compounds over time.</p></div>
-      <div class="build-card"><div class="build-card-icon">7 Years GTM</div><h3>The Foundation</h3><p>Before the AI stack existed, I was doing the work manually — outbound, LinkedIn campaigns, positioning, pipeline. That’s what makes the systems actually convert. You can’t automate a motion you don’t understand.</p></div>
+      <div class="build-card"><div class="build-card-icon">7 Years GTM</div><h3>The Foundation</h3><p>Before the AI stack existed, I was doing the work manually — outbound, LinkedIn campaigns, positioning, pipeline. That's what makes the systems actually convert. You can't automate a motion you don't understand.</p></div>
     </div>
     <div class="build-callout">
-      <p>“What makes this unusual: <strong>I see software with a business owner’s eyes.</strong> I know which features move revenue. I know what copy should say before I write the UI that displays it. Most developers don’t think like that. Most marketers can’t build what they’re thinking. I do both — and I move with the speed and urgency of someone whose livelihood depends on shipping. Because it does.”</p>
+      <p>"What makes this unusual: <strong>I see software with a business owner's eyes.</strong> I know which features move revenue. I know what copy should say before I write the UI that displays it. Most developers don't think like that. Most marketers can't build what they're thinking. I do both — and I move with the speed and urgency of someone whose livelihood depends on shipping. Because it does."</p>
     </div>
   </div>
 </section>
@@ -566,7 +606,7 @@
 <section class="section fade-in">
   <div class="container">
     <div class="section-eyebrow">Live Now</div>
-    <h2 class="section-title">What’s happening <em>right now</em></h2>
+    <h2 class="section-title">What's happening <em>right now</em></h2>
     <p class="section-desc">Real-time status across the portfolio.</p>
     <div class="focus-list">
       <div class="focus-item"><div class="focus-dot"></div><div><div class="focus-name">Stormbreaker Digital</div><div class="focus-desc">Active client engagements in defense contracting, healthcare, air freight, and manufacturing. Deploying full autonomous marketing and sales agent stacks.</div></div></div>
@@ -584,7 +624,7 @@
       <div class="writing-left">
         <div class="section-eyebrow" style="margin-bottom: 14px;">Writing</div>
         <h3>I write about building in public.</h3>
-        <p>AI agent systems, GTM engineering, what it actually takes to run autonomous infrastructure at scale — and what I’m learning in real time across eight ventures.</p>
+        <p>AI agent systems, GTM engineering, what it actually takes to run autonomous infrastructure at scale — and what I'm learning in real time across eight ventures.</p>
         <a href="/blog/" class="btn-ghost" style="margin-top: 20px; display: inline-flex;">Read the blog →</a>
       </div>
       <div class="writing-right">
