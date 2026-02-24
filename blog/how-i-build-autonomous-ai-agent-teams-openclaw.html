@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How I Build Autonomous AI Agent Teams with OpenClaw | Matt Cretzman | Matt Cretzman</title>
+<meta name="description" content="A practitioner's guide to building autonomous AI agent teams using OpenClaw — skill files, cron schedules, approval gates, and real production examples from 9 companies.">
+<link rel="canonical" href="https://mattcretzman.com/blog/how-i-build-autonomous-ai-agent-teams-openclaw">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  .post-hero { padding: 140px 0 60px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+  .post-hero-glow { position: absolute; top: 0; left: -20%; width: 700px; height: 500px; background: radial-gradient(ellipse, #f9731608, transparent 65%); pointer-events: none; }
+  .post-meta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
+  .post-date { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .post-readtime { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .post-title { font-family: var(--font-display); font-size: clamp(32px, 5vw, 60px); font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 20px; }
+  .post-subtitle { font-size: 19px; color: var(--text-secondary); max-width: 640px; line-height: 1.65; }
+  .post-body { padding: 72px 0 100px; }
+  .post-body p { color: var(--text-secondary); font-size: 18px; line-height: 1.85; margin-bottom: 24px; }
+  .post-body p strong { color: var(--text-primary); font-weight: 600; }
+  .post-body p a { color: var(--accent-orange); text-decoration: none; border-bottom: 1px solid #f9731630; transition: border-color 0.2s; }
+  .post-body p a:hover { border-color: var(--accent-orange); }
+  .post-body em { font-style: italic; }
+  .post-h2 { font-family: var(--font-display); font-size: clamp(22px, 3vw, 32px); font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary); margin: 56px 0 20px; line-height: 1.2; }
+  .post-h3 { font-family: var(--font-display); font-size: clamp(18px, 2.5vw, 22px); font-weight: 700; letter-spacing: -0.01em; color: var(--text-primary); margin: 40px 0 14px; line-height: 1.3; }
+  .post-h4 { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--text-primary); margin: 28px 0 10px; }
+  .post-divider { height: 1px; background: var(--border); margin: 48px 0; }
+  .post-list { color: var(--text-secondary); font-size: 17px; line-height: 1.8; margin: 0 0 24px 24px; }
+  .post-list li { margin-bottom: 8px; }
+  .post-list li strong { color: var(--text-primary); font-weight: 600; }
+  .post-list a { color: var(--accent-orange); text-decoration: none; border-bottom: 1px solid #f9731630; }
+  .post-code { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px 28px; margin: 28px 0; overflow-x: auto; }
+  .post-code code { font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); line-height: 1.7; white-space: pre; }
+  .post-inline-code { font-family: var(--font-mono); font-size: 14px; color: var(--accent-orange); background: var(--accent-orange-dim); padding: 2px 7px; border-radius: var(--radius-sm); border: 1px solid #f9731630; }
+  .post-table-wrap { overflow-x: auto; margin: 28px 0; }
+  .post-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .post-table th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); background: var(--bg-elevated); border: 1px solid var(--border); padding: 10px 16px; text-align: left; }
+  .post-table td { color: var(--text-secondary); border: 1px solid var(--border); padding: 10px 16px; line-height: 1.5; }
+  .post-table tr:hover td { background: var(--bg-card); }
+  .post-nav { padding: 40px 0; border-top: 1px solid var(--border); }
+  .post-nav-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  .post-author { display: flex; align-items: center; gap: 16px; padding: 32px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-xl); margin-top: 60px; }
+  .post-author-info h4 { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+  .post-author-info p { font-size: 13px; color: var(--text-muted); margin: 0; font-family: var(--font-mono); }
+  .post-author-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--accent-orange-dim); border: 2px solid var(--accent-orange); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; font-size: 18px; color: var(--accent-orange); flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="/" class="nav-logo">Matt <span>Cretzman</span></a>
+  <ul class="nav-links">
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/ventures/">Ventures</a></li>
+    <li><a href="/blog/" class="active">Writing</a></li>
+    <li><a href="/work-with-me.html" class="nav-cta">Work With Me →</a></li>
+  </ul>
+</nav>
+
+<div class="post-hero">
+  <div class="post-hero-glow"></div>
+  <div class="container-narrow">
+    <div class="post-meta">
+      <span class="badge badge-orange">AI Systems</span>
+      <span class="post-date">February 26, 2026</span>
+      <span class="post-readtime">· 13 min read</span>
+    </div>
+    <h1 class="post-title">How I Build Autonomous AI Agent Teams with OpenClaw</h1>
+    <p class="post-subtitle">A practitioner's guide to building autonomous AI agent teams using OpenClaw — skill files, cron schedules, approval gates, and real production examples from 9 companies.</p>
+  </div>
+</div>
+
+<div class="post-body">
+  <div class="container-narrow">
+    <p>I run production AI agent teams across nine companies. Not demos. Not proof-of-concepts. Systems that wake up on a schedule, do real work, produce real output, and go back to sleep until the next run.</p>
+
+<p>This post is the technical walkthrough of how I build them.</p>
+
+<p>I'm using OpenClaw as the orchestration layer, Claude and Kimi 2.5 as the LLMs, and a set of patterns I've developed over the last year of deploying these systems for my own ventures and for clients. If you're building AI agents that need to run autonomously — not chatbots, not copilots, but actual autonomous workers — this is how I do it.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">The Architecture in Plain English</h2>
+
+<p>Every AI agent system I build has three components:</p>
+
+<p><strong>Skill files</strong> define what the agent does. Think of them as a job description plus standard operating procedures, written in a format an LLM can follow. A skill file contains the agent's role, the inputs it expects, the outputs it produces, the tools it has access to, and the specific instructions for how to do its job.</p>
+
+<p><strong>Cron schedules</strong> define when the agent works. Monday at 9am. Every 6 hours. First of the month. The agent doesn't sit around waiting for a prompt — it gets triggered on a schedule, does its job, and stops.</p>
+
+<p><strong>Approval gates</strong> define what requires human review. Anything customer-facing gets flagged for approval before it goes live. Internal analysis, research, drafts — those can run fully autonomous. The gate is the trust calibration: how much do I trust this agent to act on my behalf?</p>
+
+<p>That's it. Skill + schedule + gates. Every agent I deploy follows this pattern.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">A Real Example: The Entity SEO Engine</h2>
+
+<p>Let me show you a concrete system. This is the entity SEO engine I built for my own personal brand — the system that's producing the content strategy behind mattcretzman.com.</p>
+
+<p>It has seven agent roles:</p>
+
+<p><strong>1. Entity Strategist</strong> — Runs monthly. Browses Google for every branded search term ("Matt Cretzman," "Matt Cretzman AI," "Matt Cretzman TextEvidence," etc.), catalogs page 1-3 results, checks spoke sites for founder pages, verifies structured data, and produces a monthly entity health report with gaps and priorities.</p>
+
+<p><strong>2. Keyword Researcher</strong> — Runs weekly (Mondays). Reads the target keyword clusters file, identifies content gaps, checks what's ranking, and adds new opportunities to the content queue.</p>
+
+<p><strong>3. Authority Content Writer</strong> — Runs daily (Tuesday through Saturday). Pulls the next item from the content queue, reads the keyword brief, writes a full blog post following the brand voice guide and SEO checklist, and saves it as a draft.</p>
+
+<p><strong>4. SEO Editor</strong> — Runs after each post is written. Scores the draft against a 100-point SEO checklist covering structure, keyword optimization, entity signals, technical SEO, and engagement. Posts scoring 90+ go to publish. 80-89 get flagged for minor tweaks. Below 80 get sent back to the writer.</p>
+
+<p><strong>5. Publisher</strong> — Runs after editorial approval. Takes the approved post, commits it to the Git repo, and deploys.</p>
+
+<p><strong>6. Cross-Poster</strong> — Runs Wednesday and Friday. Takes published posts and generates adapted versions for Medium (full repost with canonical URL), LinkedIn (newsletter edition), and dev.to (technical posts only).</p>
+
+<p><strong>7. Entity Monitor</strong> — Runs weekly (Fridays). Checks branded search results, compares to the previous week's snapshot, flags changes, and produces a digest.</p>
+
+<p>Seven agents. One system. It runs the entire content operation for my personal brand with minimal human intervention. I review the weekly digest. I approve or redirect posts that need it. Otherwise, the engine runs.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">The Skill File Anatomy</h2>
+
+<p>Here's what a skill file actually looks like in structure. I'll use the Authority Content Writer as an example:</p>
+
+<pre class="post-code"><code>entity-seo-engine/
+<p>├── SKILL.md                    ← The main instruction set └── refs/     ├── brand-voice.md          ← Matt's writing style guide     ├── seo-checklist.md        ← 100-point scoring rubric     ├── keyword-clusters.md     ← Target keyword families     ├── mdx-template.md         ← Blog post template     ├── content-queue-schema.md ← JSON schema for the queue     ├── entity-map.md           ← Entity relationships     └── cross-post-guide.md     ← Syndication rules</code></pre></p>
+
+<p>The SKILL.md is the main file — always under 500 lines. It contains the role definition, the step-by-step process, and pointers to reference files the agent should read for specific tasks.</p>
+
+<p>The reference files are loaded on demand. The writer agent reads <code class="post-inline-code">brand-voice.md</code> and <code class="post-inline-code">seo-checklist.md</code> every time it writes a post. It reads <code class="post-inline-code">keyword-clusters.md</code> when selecting what to write about. It never needs to load all seven reference files at once — progressive disclosure keeps the context window focused.</p>
+
+<p>This pattern — a concise main skill file with on-demand reference documents — is what makes the system work at scale. You can build incredibly sophisticated agent behavior without hitting context window limits, because the agent only loads what it needs for the current task.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">The Cron Configuration</h2>
+
+<p>The schedule for the entity SEO engine looks like this:</p>
+
+<div class="post-table-wrap"><table class="post-table"><thead><tr><th>Agent</th><th>Schedule</th><th>Trigger</th></tr></thead><tbody><tr><td>Entity Strategist</td><td>1st of each month, 8am</td><td>Cron</td></tr>
+<p><tr><td>Keyword Researcher</td><td>Monday 8am</td><td>Cron</td></tr> <tr><td>Content Writer</td><td>Tue-Sat 9am</td><td>Cron</td></tr> <tr><td>SEO Editor</td><td>After each write</td><td>Event (post-write hook)</td></tr> <tr><td>Publisher</td><td>After editorial pass</td><td>Event (approval gate)</td></tr> <tr><td>Cross-Poster</td><td>Wed + Fri 2pm</td><td>Cron</td></tr> <tr><td>Entity Monitor</td><td>Friday 4pm</td><td>Cron</td></tr></tbody></table></div></p>
+
+<p>Some agents run on time-based crons. Others run on event triggers — the SEO Editor fires automatically when the Content Writer finishes a draft. The Publisher fires when a human (me) approves the editorial output.</p>
+
+<p>This hybrid approach — cron for scheduled work, events for sequential workflows — is how you build systems that feel cohesive rather than like a collection of disconnected scripts.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">Approval Gates in Practice</h2>
+
+<p>This is where most people building AI agents either over-trust or under-trust the system.</p>
+
+<p>Over-trust: let the agent publish customer-facing content without review. You'll get something embarrassing in production within a week.</p>
+
+<p>Under-trust: require approval for every intermediate step. You'll spend more time reviewing agent output than it would take to do the work yourself. That defeats the purpose.</p>
+
+<p>My rule: <strong>anything a customer or prospect will see requires human approval. Everything else runs autonomous.</strong></p>
+
+<p>For the SEO engine, that means:</p>
+<ul class="post-list">
+<p>  <li>Keyword research → autonomous</li>   <li>Content writing → autonomous (agent writes the draft)</li>   <li>SEO scoring → autonomous</li>   <li>Publishing → <strong>approval gate</strong> (I review the draft before it goes live)</li>   <li>Cross-posting → autonomous (the source post was already approved)</li>   <li>Entity monitoring → autonomous (it's reporting to me, not acting externally)</li> </ul></p>
+
+<p>For TextEvidence's AI SDR, the gates are different:</p>
+<ul class="post-list">
+<p>  <li>Lead qualification → autonomous</li>   <li>Answering standard product questions → autonomous (trained on a knowledge base)</li>   <li>Booking demo calls → autonomous</li>   <li>Custom pricing discussions → <strong>approval gate</strong></li>   <li>Anything involving legal claims about the product → <strong>approval gate</strong></li> </ul></p>
+
+<p>The gates aren't static. As I build trust in an agent's output quality, I loosen the gates. The SEO engine's Content Writer started with every post requiring approval. Now, posts scoring 95+ publish automatically. I only review the ones that score 80-94.</p>
+
+<p>Trust is earned, even from AI.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">The LLM Selection Decision</h2>
+
+<p>I use two primary models:</p>
+
+<p><strong>Claude</strong> for reasoning-heavy tasks — content writing, strategic analysis, entity mapping, anything that requires nuanced judgment. Claude handles the Authority Content Writer, Entity Strategist, and SEO Editor roles.</p>
+
+<p><strong>Kimi 2.5</strong> for high-volume, cost-sensitive tasks — cross-posting adaptations, routine keyword research, and monitoring. Where I need throughput and the task is well-defined, Kimi 2.5 delivers at a fraction of Claude's cost.</p>
+
+<p>The decision framework is simple: if the task requires judgment, use Claude. If the task requires volume and follows a clear template, use Kimi 2.5. Some agents use both — the Content Writer uses Claude for the initial draft and Kimi 2.5 for generating the Medium and LinkedIn adaptations.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">Deploying This for Clients</h2>
+
+<p>The pattern I've described for my personal brand is the same pattern I deploy for Stormbreaker Digital clients. The specific agents change — a manufacturing client might need an RFP response agent instead of a content writer — but the architecture is identical:</p>
+
+<ol class="post-list">
+<p>  <li><strong>Map the process.</strong> Walk through every marketing or sales workflow the client runs. Identify the repetitive, well-defined tasks.</li> </ol></p>
+
+<ol class="post-list">
+<p>  <li><strong>Design the agents.</strong> Each repeatable task becomes an agent with a skill file. Define the role, inputs, outputs, tools, and instructions.</li> </ol></p>
+
+<ol class="post-list">
+<p>  <li><strong>Set the schedule.</strong> Cron for time-based work. Event triggers for sequential workflows.</li> </ol></p>
+
+<ol class="post-list">
+<p>  <li><strong>Calibrate the gates.</strong> Start with more human review than you think you need. Loosen as the agents prove reliable.</li> </ol></p>
+
+<ol class="post-list">
+<p>  <li><strong>Deploy and monitor.</strong> The Entity Monitor pattern applies to every system — build an agent that watches the other agents and reports on output quality.</li> </ol></p>
+
+<p>For one defense contractor, I deployed a recruitment marketing system across 25+ military installations. AI agents handled LinkedIn outreach across 4 profiles simultaneously, email campaigns across multiple domains, and blog content for SEO — all coordinated through a Cascading Channel Architecture that ensured each channel benefited from data generated by the others.</p>
+
+<p>The connection-to-opportunity rate hit nearly 4x the industry benchmark. Not because the AI was magic — because the system ran consistently, on schedule, without the human inconsistency that tanks most outbound campaigns.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">The Mistakes I Made Early</h2>
+
+<p>A few things I got wrong that might save you time:</p>
+
+<p><strong>Vague skill files.</strong> My first agent instructions read like I was talking to a smart intern: "Write a good blog post about AI agents." The output was generic garbage. The fix was explicit instructions — word count targets, SEO requirements, structural templates, voice guidelines, specific examples of good and bad output. AI agents don't struggle with capability. They struggle with ambiguity.</p>
+
+<p><strong>No monitoring agent.</strong> I deployed a content engine without a quality check and got three weeks of declining SEO scores before I noticed. Now every system includes a monitoring agent that tracks output quality over time.</p>
+
+<p><strong>Too many gates.</strong> My first client deployment required approval at five different stages. The client got approval fatigue by day three and started rubber-stamping everything. Two gates — one after draft, one before external publish — is usually right.</p>
+
+<p><strong>Monolithic skill files.</strong> I tried putting everything into one massive SKILL.md. The context window got saturated and the agent's quality dropped. The progressive disclosure pattern — concise main file, reference docs loaded on demand — solved this completely.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">What This Actually Costs</h2>
+
+<p>The infrastructure cost for running these agent systems is surprisingly low.</p>
+
+<p>The entity SEO engine running 5 posts per week, with all seven agent roles active, costs roughly $50-75/month in LLM API calls. That includes Claude for writing and editing, Kimi 2.5 for cross-posting and monitoring, and the occasional burst when the Entity Strategist runs its monthly comprehensive audit.</p>
+
+<p>Compare that to a content marketing specialist ($4,000-$8,000/month), a content writer ($2,000-$5,000/month), and an SEO analyst ($3,000-$6,000/month). The agent system doesn't replace all human judgment — I still review and approve — but it replaces 90% of the execution hours.</p>
+
+<p>For HeyBaddie, the entire AI platform runs at $15-25/month. For TextEvidence's SDR agent, the cost is negligible compared to a human SDR at $50,000-$70,000/year base salary.</p>
+
+<p>The economics aren't even close.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">The Compounding Effect</h2>
+
+<p>Here's what nobody tells you about building AI agent systems: the second one is 5x faster than the first, and the tenth is barely any work at all.</p>
+
+<p>Every skill file I write teaches me patterns that transfer. The approval gate framework I built for the SEO engine works for any content system. The monitoring agent pattern works for any system. The progressive disclosure architecture works for any complex skill.</p>
+
+<p>More importantly, skill files themselves transfer between ventures. The Delightful Outbound skill I wrote for TextEvidence's attorney outreach campaign is now used by Stormbreaker for every client engagement. The brand voice extraction process I built for a healthcare payments client became a reusable Voice Extraction Method. The PRD template I use for Phase-Gate AI Development started as a one-off document for MyPRQ and now kicks off every product build.</p>
+
+<p>This is what compounding looks like with AI agents. Not just the output — the infrastructure itself gets better with every deployment.</p>
+
+<div class="post-divider"></div>
+
+<p><em>Tomorrow: the origin story nobody asks about — how a nonprofit founder who lost his daughter ended up building AI agent systems in Texas. The context matters.</em></p>
+
+<p><em>I'm Matt Cretzman. I build AI agent systems through <a href="https://stormbreakerdigital.com">Stormbreaker Digital</a>. If you want to see the systems in action — or if you're building agent teams yourself and want to compare notes — connect with me on <a href="https://linkedin.com/in/mattcretzman">LinkedIn</a> or follow along at <a href="https://mattcretzman.com/blog">mattcretzman.com/blog</a>.</em></p>
+    <div class="post-author">
+      <div class="post-author-avatar">M</div>
+      <div class="post-author-info">
+        <h4>Matt Cretzman</h4>
+        <p>Founder, Stormbreaker Digital · AI Systems Builder · Fractional CMO</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="post-nav">
+  <div class="container-narrow">
+    <div class="post-nav-inner">
+      <a href="/blog/" class="btn-ghost">← Back to Writing</a>
+      <a href="/work-with-me.html" class="btn-outline">Work With Me →</a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div><a href="/" class="footer-logo">Matt <span>Cretzman</span></a><div class="footer-tagline">Builder. GTM Engineer. AI Systems Architect.</div></div>
+      <div class="footer-links"><a href="/about.html">About</a><a href="/ventures/">Ventures</a><a href="/work-with-me.html">Work With Me</a><a href="/blog/">Writing</a><a href="https://stormbreakerdigital.com">Stormbreaker Digital</a><a href="https://linkedin.com/in/mattcretzman">LinkedIn</a></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2026 Matt Cretzman. All rights reserved.</div><div class="footer-copy">Built with Claude, Cursor, and Vercel.</div></div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', scrollY > 20));
+</script>
+</body>
+</html>

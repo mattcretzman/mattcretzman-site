@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Tech Stack for Running 9 Companies as a Solo Founder | Matt Cretzman | Matt Cretzman</title>
+<meta name="description" content="The complete tech stack Matt Cretzman uses to run 9 companies — from AI coding assistants and agent orchestration to CRM, enrichment, and automation tools.">
+<link rel="canonical" href="https://mattcretzman.com/blog/tech-stack-running-9-companies-solo-founder">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  .post-hero { padding: 140px 0 60px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+  .post-hero-glow { position: absolute; top: 0; left: -20%; width: 700px; height: 500px; background: radial-gradient(ellipse, #f9731608, transparent 65%); pointer-events: none; }
+  .post-meta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
+  .post-date { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .post-readtime { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .post-title { font-family: var(--font-display); font-size: clamp(32px, 5vw, 60px); font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 20px; }
+  .post-subtitle { font-size: 19px; color: var(--text-secondary); max-width: 640px; line-height: 1.65; }
+  .post-body { padding: 72px 0 100px; }
+  .post-body p { color: var(--text-secondary); font-size: 18px; line-height: 1.85; margin-bottom: 24px; }
+  .post-body p strong { color: var(--text-primary); font-weight: 600; }
+  .post-body p a { color: var(--accent-orange); text-decoration: none; border-bottom: 1px solid #f9731630; transition: border-color 0.2s; }
+  .post-body p a:hover { border-color: var(--accent-orange); }
+  .post-body em { font-style: italic; }
+  .post-h2 { font-family: var(--font-display); font-size: clamp(22px, 3vw, 32px); font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary); margin: 56px 0 20px; line-height: 1.2; }
+  .post-h3 { font-family: var(--font-display); font-size: clamp(18px, 2.5vw, 22px); font-weight: 700; letter-spacing: -0.01em; color: var(--text-primary); margin: 40px 0 14px; line-height: 1.3; }
+  .post-h4 { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--text-primary); margin: 28px 0 10px; }
+  .post-divider { height: 1px; background: var(--border); margin: 48px 0; }
+  .post-list { color: var(--text-secondary); font-size: 17px; line-height: 1.8; margin: 0 0 24px 24px; }
+  .post-list li { margin-bottom: 8px; }
+  .post-list li strong { color: var(--text-primary); font-weight: 600; }
+  .post-list a { color: var(--accent-orange); text-decoration: none; border-bottom: 1px solid #f9731630; }
+  .post-code { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px 28px; margin: 28px 0; overflow-x: auto; }
+  .post-code code { font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); line-height: 1.7; white-space: pre; }
+  .post-inline-code { font-family: var(--font-mono); font-size: 14px; color: var(--accent-orange); background: var(--accent-orange-dim); padding: 2px 7px; border-radius: var(--radius-sm); border: 1px solid #f9731630; }
+  .post-table-wrap { overflow-x: auto; margin: 28px 0; }
+  .post-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .post-table th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); background: var(--bg-elevated); border: 1px solid var(--border); padding: 10px 16px; text-align: left; }
+  .post-table td { color: var(--text-secondary); border: 1px solid var(--border); padding: 10px 16px; line-height: 1.5; }
+  .post-table tr:hover td { background: var(--bg-card); }
+  .post-nav { padding: 40px 0; border-top: 1px solid var(--border); }
+  .post-nav-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  .post-author { display: flex; align-items: center; gap: 16px; padding: 32px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-xl); margin-top: 60px; }
+  .post-author-info h4 { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+  .post-author-info p { font-size: 13px; color: var(--text-muted); margin: 0; font-family: var(--font-mono); }
+  .post-author-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--accent-orange-dim); border: 2px solid var(--accent-orange); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; font-size: 18px; color: var(--accent-orange); flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="/" class="nav-logo">Matt <span>Cretzman</span></a>
+  <ul class="nav-links">
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/ventures/">Ventures</a></li>
+    <li><a href="/blog/" class="active">Writing</a></li>
+    <li><a href="/work-with-me.html" class="nav-cta">Work With Me →</a></li>
+  </ul>
+</nav>
+
+<div class="post-hero">
+  <div class="post-hero-glow"></div>
+  <div class="container-narrow">
+    <div class="post-meta">
+      <span class="badge badge-orange">AI Systems</span>
+      <span class="post-date">March 2, 2026</span>
+      <span class="post-readtime">· 11 min read</span>
+    </div>
+    <h1 class="post-title">My Tech Stack for Running 9 Companies as a Solo Founder</h1>
+    <p class="post-subtitle">The complete tech stack Matt Cretzman uses to run 9 companies — from AI coding assistants and agent orchestration to CRM, enrichment, and automation tools.</p>
+  </div>
+</div>
+
+<div class="post-body">
+  <div class="container-narrow">
+    <p>People ask how I run nine companies. They expect the answer to be about time management or delegation or some productivity framework with a branded name.</p>
+
+<p>The real answer is tools. Specifically, the right tools connected in the right way, with AI agents handling the repetitive execution layer. I'm not working nine times harder than a normal founder. I'm running nine times more infrastructure.</p>
+
+<p>Here's the complete stack — organized by function, with the reasoning behind each choice.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">AI Coding & Product Development</h2>
+
+<p><strong>Claude Code</strong> — My primary development environment for building products. I run parallel sessions — three Claude Code instances building different features of the same product simultaneously. This is how HeyBaddie went from concept to 20+ database tables in 2-3 weeks. Claude handles complex logic, database architecture, API integrations, and full-stack development. When I need reasoning and nuance in the code, this is where I go.</p>
+
+<p><strong>Replit Agent</strong> — For rapid prototyping and feature sprints. CigarSnap shipped 15+ features in 48 hours using Replit Agent. The advantage is speed — Replit Agent can scaffold an entire app from a description and iterate on it in real-time. The tradeoff is less control over architecture decisions, so I use it for MVPs and feature blitzes, then migrate to a more controlled environment for production.</p>
+
+<p><strong>Phase-Gate AI Development</strong> — This isn't a tool, it's the methodology that makes the tools work. Before touching any coding assistant, I write a complete PRD — every database table, API endpoint, user flow, edge case, and acceptance criterion. The PRD is the product. AI coding assistants don't struggle with capability. They struggle with ambiguity. Remove the ambiguity, and they build fast. This is what made MyPRQ possible on Christmas Day in a single session.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">AI Agent Orchestration</h2>
+
+<p><strong>OpenClaw</strong> — The orchestration layer for every autonomous agent system I deploy. OpenClaw handles skill file management, cron scheduling, tool access, and agent coordination. I run it on a dedicated Mac Mini with security hardening beyond default configurations.</p>
+
+<p>The entity SEO engine for mattcretzman.com runs on OpenClaw — seven agents handling keyword research, content writing, editorial review, publishing, cross-posting, and search monitoring. The same framework powers TextEvidence's autonomous content engine, client deployments, and internal operations.</p>
+
+<p>I chose OpenClaw because it's open-source and I can inspect every component. After the ClawHavoc incident exposed an 11.3% malicious rate in open-source AI skills, running my own infrastructure isn't paranoia — it's basic security hygiene.</p>
+
+<p><strong>Cron + Event Architecture</strong> — Agents run on time-based cron schedules for periodic work (Monday keyword research, daily content writing) and event triggers for sequential workflows (SEO editor fires after content writer completes a draft). This hybrid approach is what makes the systems feel cohesive rather than like disconnected scripts.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">LLM Layer</h2>
+
+<p><strong>Claude (Anthropic)</strong> — For reasoning-heavy tasks. Content writing, strategic analysis, entity mapping, complex decision-making, anything requiring nuanced judgment. Claude handles the thinking work.</p>
+
+<p><strong>Kimi 2.5</strong> — For high-volume, cost-sensitive tasks. Cross-posting adaptations, routine research, monitoring, and template-based generation. Where I need throughput and the task is well-defined, Kimi 2.5 runs at a fraction of Claude's cost.</p>
+
+<p>The decision framework is simple: if the task requires judgment, use Claude. If the task requires volume and follows a template, use Kimi 2.5. Some agents use both — Claude writes the initial draft, Kimi 2.5 generates the Medium and LinkedIn adaptations.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">CRM & Client Management</h2>
+
+<p><strong>HubSpot</strong> — For client-facing engagements where the client needs to see the pipeline. Full deal tracking, email sequences, lead scoring, meeting booking, workflow automation. Most fractional CMO engagements run through HubSpot because that's what enterprise clients expect.</p>
+
+<p><strong>GoHighLevel</strong> — The backbone of LeadStorm AI and the CRM for ventures where I control the entire stack. GHL combines CRM, email marketing, SMS, funnel building, calendar booking, automation workflows, and phone systems in one platform. LeadStorm is a white-label of GHL combined with Buzz.ai for LinkedIn automation — replacing 5-7 disconnected tools at $297/month versus $1,500-$3,000 for the à la carte stack.</p>
+
+<p>I run both because they serve different needs. HubSpot is the enterprise play. GoHighLevel is the builder's play.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">Data Enrichment & Intelligence</h2>
+
+<p><strong>Clay</strong> — The enrichment engine I can't imagine working without. Clay runs waterfall enrichment across 150+ data providers — Hunter, Apollo, Prospeo, Clearbit for email; People Data Labs, ContactOut, Selligence for phone; plus AI qualification using Claygent agents at three model tiers.</p>
+
+<p>For a healthcare client, I built an entire producer intelligence engine on Clay — enriching thousands of insurance brokers with decision-maker contacts, competitive intelligence, M&A activity signals, and AI-scored qualification. The waterfall approach means I get the data I need at the lowest possible cost: query the cheapest provider first, escalate only when needed.</p>
+
+<p><strong>LinkedIn Sales Navigator</strong> — For initial prospecting and account mapping. The second-connection data is particularly useful for multi-channel outreach routing — knowing whether a prospect is a 1st or 2nd connection changes whether I lead with LinkedIn or email.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">Automation & Workflows</h2>
+
+<p><strong>n8n</strong> — The workflow orchestration layer connecting everything. n8n handles the pipes between Clay, CRM systems, outbound tools, monitoring triggers, and AI agent coordination.</p>
+
+<p>Key patterns I use constantly:</p>
+
+<p>Clay as enrichment engine → n8n as orchestrator → CRM for activation. This is the data pipeline for every outbound campaign.</p>
+
+<p>Intent signal capture: Apify or PhantomBuster scrapes a data source → n8n processes and routes → Clay enriches → outreach triggers automatically.</p>
+
+<p>Bidirectional webhooks between Clay and n8n for real-time data processing. When Clay finishes enriching a batch, n8n picks it up immediately and routes it to the right campaign.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">Outbound & Sales</h2>
+
+<p><strong>SmartLead</strong> — Cold email at scale. Domain rotation, inbox warmup management, send scheduling, deliverability optimization. One client engagement ran 25,000 emails per month through SmartLead's infrastructure.</p>
+
+<p><strong>HeyReach</strong> — Server-side LinkedIn automation. Connection requests, profile views, DMs, post engagement — all running without a browser open. Critical for autonomous operation because browser-based LinkedIn tools require a computer to stay on.</p>
+
+<p><strong>LeadStorm AI</strong> — My own platform, and yes, I use it daily. LinkedIn automation, multi-channel sequences, the 696M+ contact database, video personalization, and AI campaign creation. I'm building the tool I use.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">Website & Publishing</h2>
+
+<p><strong>Framer</strong> — All websites across my ventures. mattcretzman.com, textevidence.ai, and others run on Framer. The Server API (released February 2026) enables programmatic content management — my OpenClaw agents can publish blog posts directly to the CMS without me touching the Framer editor.</p>
+
+<p><strong>Vercel</strong> — For custom web applications that need full-stack capabilities. The Vincit Group sales intelligence dashboard, interactive competitive briefings, and regulatory maps deploy to Vercel via GitHub with automatic CI/CD.</p>
+
+<p><strong>Supabase</strong> — PostgreSQL database with Row Level Security, real-time subscriptions, and built-in auth. Powers HeyBaddie, Skill Refinery, and several client applications. The free tier is remarkably capable — HeyBaddie's entire 20+ table database runs on Supabase.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">Meeting Intelligence</h2>
+
+<p><strong>Fireflies AI</strong> — Records and transcribes every client call. I pull transcripts directly into Claude via MCP for strategy decisions, ensuring meeting discussions get captured and acted on without manual note-taking. For the behavioral science advisory client, Fireflies transcripts became the raw material for an entire brand strategy document.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">Content & Communication</h2>
+
+<p><strong>Descript</strong> — Video editing and content repurposing. Client podcast appearances get cut into short-form content automatically.</p>
+
+<p><strong>Medium / Substack / dev.to</strong> — Cross-posting platforms for content syndication. Every blog post gets adapted versions on Medium (full repost with canonical URL), Substack (newsletter edition), and dev.to (technical posts). The OpenClaw cross-poster agent handles most of this automatically.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">The Meta-Stack</h2>
+
+<p>Here's what makes all of this work together: every tool in this stack connects to at least one other tool through either an API, a webhook, an MCP integration, or an n8n workflow. Nothing operates in isolation.</p>
+
+<p>The pattern looks like this:</p>
+
+<pre class="post-code"><code>Clay (enrichment) ↔ n8n (orchestration) ↔ CRM (HubSpot/GHL)
+<p>     ↕                                          ↕ SmartLead / HeyReach (outbound)          Fireflies (intelligence)      ↕                                          ↕ OpenClaw (agent orchestration) ↔ Claude/Kimi (LLM layer)      ↕ Framer / Vercel (publishing)</code></pre></p>
+
+<p>Data flows from enrichment through automation to activation. Intelligence flows from meetings through transcription to strategy. Content flows from AI writing through editorial review to multi-platform publishing. Everything talks to everything.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">What This Costs</h2>
+
+<p>People assume running nine companies requires massive infrastructure spending. It doesn't.</p>
+
+<div class="post-table-wrap"><table class="post-table"><thead><tr><th>Category</th><th>Monthly Cost</th></tr></thead><tbody><tr><td>LLM APIs (Claude + Kimi 2.5)</td><td>$200-400</td></tr>
+<p><tr><td>Supabase (multiple ventures)</td><td>$0-75</td></tr> <tr><td>Vercel</td><td>$20-50</td></tr> <tr><td>n8n</td><td>$20-50</td></tr> <tr><td>Framer (multiple sites)</td><td>$50-100</td></tr> <tr><td>Clay</td><td>$149-349</td></tr> <tr><td>SmartLead</td><td>$94-174</td></tr> <tr><td>GoHighLevel</td><td>$297</td></tr> <tr><td>Fireflies</td><td>$19-39</td></tr> <tr><td>Misc tools</td><td>$100-200</td></tr> <tr><td>**Total**</td><td>**~$1,000-1,500/month**</td></tr></tbody></table></div></p>
+
+<p>Under $1,500 per month to run the operational infrastructure for nine companies. That's less than one junior marketing coordinator's monthly salary in most US markets.</p>
+
+<p>The expensive part isn't the tools. It's knowing which tools to connect, in what order, with which AI agent patterns. The stack without the architecture is just a collection of subscriptions. The architecture without the stack is just a whiteboard diagram. Together, they're what makes one person capable of operating at the scale of a small team.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">The Decision Framework</h2>
+
+<p>When I evaluate a new tool, I ask three questions:</p>
+
+<ol class="post-list">
+<p>  <li>Does it have an API or webhook I can connect to n8n or OpenClaw?</li>   <li>Does it replace a manual task an AI agent could handle?</li>   <li>Does it compound — will it make the existing stack more capable?</li> </ol></p>
+
+<p>If yes to all three, I adopt it. If it's a standalone tool that doesn't connect to anything, I skip it. The whole point is the network effect between tools. A new tool that strengthens the mesh is worth 10x a tool that sits in its own silo.</p>
+
+<div class="post-divider"></div>
+
+<p><em>That's Week 1. Seven posts in seven days — the overview, the portfolio, the technical architecture, the origin story, the Tony Jeary partnership, the philosophy, and the tools. Next week I'm going deep on individual ventures, starting with TextEvidence on Monday.</em></p>
+
+<p><em>I'm Matt Cretzman. Follow along at <a href="https://mattcretzman.com/blog">mattcretzman.com/blog</a> or connect on <a href="https://linkedin.com/in/mattcretzman">LinkedIn</a>. The daily publishing continues.</em></p>
+    <div class="post-author">
+      <div class="post-author-avatar">M</div>
+      <div class="post-author-info">
+        <h4>Matt Cretzman</h4>
+        <p>Founder, Stormbreaker Digital · AI Systems Builder · Fractional CMO</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="post-nav">
+  <div class="container-narrow">
+    <div class="post-nav-inner">
+      <a href="/blog/" class="btn-ghost">← Back to Writing</a>
+      <a href="/work-with-me.html" class="btn-outline">Work With Me →</a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div><a href="/" class="footer-logo">Matt <span>Cretzman</span></a><div class="footer-tagline">Builder. GTM Engineer. AI Systems Architect.</div></div>
+      <div class="footer-links"><a href="/about.html">About</a><a href="/ventures/">Ventures</a><a href="/work-with-me.html">Work With Me</a><a href="/blog/">Writing</a><a href="https://stormbreakerdigital.com">Stormbreaker Digital</a><a href="https://linkedin.com/in/mattcretzman">LinkedIn</a></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2026 Matt Cretzman. All rights reserved.</div><div class="footer-copy">Built with Claude, Cursor, and Vercel.</div></div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', scrollY > 20));
+</script>
+</body>
+</html>

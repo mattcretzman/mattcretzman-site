@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What I Learned Co-Authoring a Book with Tony Jeary | Matt Cretzman | Matt Cretzman</title>
+<meta name="description" content="Matt Cretzman shares lessons from co-authoring 'The LinkedIn Advantage' with Tony Jeary — and how that partnership led to building Skill Refinery.">
+<link rel="canonical" href="https://mattcretzman.com/blog/what-i-learned-co-authoring-book-tony-jeary">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  .post-hero { padding: 140px 0 60px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+  .post-hero-glow { position: absolute; top: 0; left: -20%; width: 700px; height: 500px; background: radial-gradient(ellipse, #f9731608, transparent 65%); pointer-events: none; }
+  .post-meta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
+  .post-date { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .post-readtime { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .post-title { font-family: var(--font-display); font-size: clamp(32px, 5vw, 60px); font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 20px; }
+  .post-subtitle { font-size: 19px; color: var(--text-secondary); max-width: 640px; line-height: 1.65; }
+  .post-body { padding: 72px 0 100px; }
+  .post-body p { color: var(--text-secondary); font-size: 18px; line-height: 1.85; margin-bottom: 24px; }
+  .post-body p strong { color: var(--text-primary); font-weight: 600; }
+  .post-body p a { color: var(--accent-orange); text-decoration: none; border-bottom: 1px solid #f9731630; transition: border-color 0.2s; }
+  .post-body p a:hover { border-color: var(--accent-orange); }
+  .post-body em { font-style: italic; }
+  .post-h2 { font-family: var(--font-display); font-size: clamp(22px, 3vw, 32px); font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary); margin: 56px 0 20px; line-height: 1.2; }
+  .post-h3 { font-family: var(--font-display); font-size: clamp(18px, 2.5vw, 22px); font-weight: 700; letter-spacing: -0.01em; color: var(--text-primary); margin: 40px 0 14px; line-height: 1.3; }
+  .post-h4 { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--text-primary); margin: 28px 0 10px; }
+  .post-divider { height: 1px; background: var(--border); margin: 48px 0; }
+  .post-list { color: var(--text-secondary); font-size: 17px; line-height: 1.8; margin: 0 0 24px 24px; }
+  .post-list li { margin-bottom: 8px; }
+  .post-list li strong { color: var(--text-primary); font-weight: 600; }
+  .post-list a { color: var(--accent-orange); text-decoration: none; border-bottom: 1px solid #f9731630; }
+  .post-code { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px 28px; margin: 28px 0; overflow-x: auto; }
+  .post-code code { font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); line-height: 1.7; white-space: pre; }
+  .post-inline-code { font-family: var(--font-mono); font-size: 14px; color: var(--accent-orange); background: var(--accent-orange-dim); padding: 2px 7px; border-radius: var(--radius-sm); border: 1px solid #f9731630; }
+  .post-table-wrap { overflow-x: auto; margin: 28px 0; }
+  .post-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .post-table th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); background: var(--bg-elevated); border: 1px solid var(--border); padding: 10px 16px; text-align: left; }
+  .post-table td { color: var(--text-secondary); border: 1px solid var(--border); padding: 10px 16px; line-height: 1.5; }
+  .post-table tr:hover td { background: var(--bg-card); }
+  .post-nav { padding: 40px 0; border-top: 1px solid var(--border); }
+  .post-nav-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  .post-author { display: flex; align-items: center; gap: 16px; padding: 32px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-xl); margin-top: 60px; }
+  .post-author-info h4 { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+  .post-author-info p { font-size: 13px; color: var(--text-muted); margin: 0; font-family: var(--font-mono); }
+  .post-author-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--accent-orange-dim); border: 2px solid var(--accent-orange); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; font-size: 18px; color: var(--accent-orange); flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="/" class="nav-logo">Matt <span>Cretzman</span></a>
+  <ul class="nav-links">
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/ventures/">Ventures</a></li>
+    <li><a href="/blog/" class="active">Writing</a></li>
+    <li><a href="/work-with-me.html" class="nav-cta">Work With Me →</a></li>
+  </ul>
+</nav>
+
+<div class="post-hero">
+  <div class="post-hero-glow"></div>
+  <div class="container-narrow">
+    <div class="post-meta">
+      <span class="badge badge-purple">Fractional CMO</span>
+      <span class="post-date">February 28, 2026</span>
+      <span class="post-readtime">· 9 min read</span>
+    </div>
+    <h1 class="post-title">What I Learned Co-Authoring a Book with Tony Jeary</h1>
+    <p class="post-subtitle">Matt Cretzman shares lessons from co-authoring 'The LinkedIn Advantage' with Tony Jeary — and how that partnership led to building Skill Refinery.</p>
+  </div>
+</div>
+
+<div class="post-body">
+  <div class="container-narrow">
+    <p>I co-authored a book with Tony Jeary. If you don't know Tony, he's coached the presidents of Samsung, Walmart, Ford, and dozens of other companies. He's published 125+ books. His clients call him "The RESULTS Guy™" and he's earned the title over decades.</p>
+
+<p>I'm a guy who was cleaning pools in 2017.</p>
+
+<p>The story of how we ended up writing a book together — and what that partnership turned into — is one of the stranger threads in my career. It also led directly to building Skill Refinery, which might end up being the most important company in my portfolio. But I'm getting ahead of myself.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">How We Met</h2>
+
+<p>I first saw Tony speak at a networking event called Biz Owner's Ed in Addison, Texas. I was in the audience. He was on stage. The gap between where I was and where he was felt enormous.</p>
+
+<p>I did what you do at networking events — I walked up after the talk, took a selfie, grabbed one of his books, and told myself I'd follow up. I didn't, at least not for a while.</p>
+
+<p>Years later, we reconnected over a Sunday lunch at a restaurant in Flower Mound. By then I'd built Stormbreaker Digital, was landing clients across professional sports and B2B SaaS, and had developed a real methodology around LinkedIn that was producing consistent results. Tony saw something in how I approached business development that resonated with his own philosophy of clarity, focus, and execution.</p>
+
+<p>He told me: "You have a knack and gift to help people build pipeline."</p>
+
+<p>That one sentence became the foundation of the book.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">The Book: The LinkedIn Advantage</h2>
+
+<p>We wrote "The LinkedIn Advantage" together — published by RESULTS Faster! Publishing in 2024. It wasn't a ghost-written project where one person lends their name. Tony and I both wrote, both edited, both argued about structure and positioning.</p>
+
+<p>The decision that mattered most was framing. Tony pushed for something beyond a tactics guide. He wanted the book to carry a philosophy, not just a playbook. That's how the Pipeline Principle was born: "Your pipeline is your lifeline."</p>
+
+<p>For most people, that sounds like a business maxim. For me, it was literally true. The network I'd built on LinkedIn didn't just generate revenue — it rebuilt my life after losing Azlynn, after the divorce, after three years of nothing working. The relationships I formed through LinkedIn led to founding Stormbreaker, led to meeting clients who became friends, led to partnerships that opened doors I couldn't have opened alone. The pipeline was my lifeline.</p>
+
+<p>Tony saw that the personal story and the professional methodology were the same story. That's what elevated the book from "here's how to use LinkedIn" to something that actually resonated with people.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">The Frameworks That Came Out of It</h2>
+
+<p>Writing a book forces you to name things. Patterns you've been using intuitively suddenly need labels, because you can't explain a process to a reader without giving it structure.</p>
+
+<p>Three frameworks crystallized during the writing process:</p>
+
+<p><strong>The BCT Method (Brand, Content, Traffic).</strong> I'd been running this diagnostic on every client engagement for years without calling it anything. The pattern was obvious — campaigns that worked had clients with established brands and content. Campaigns that flopped had clients who skipped straight to traffic generation. Brand first. Content second. Traffic third. Writing the book forced me to name it, structure it, and explain why the sequence matters.</p>
+
+<p><strong>The Pipeline Principle.</strong> The philosophical backbone. Your network isn't a nice-to-have — it's infrastructure. When everything else falls apart, the relationships you've built are what carry you forward. This isn't abstract. I can point to the exact LinkedIn connections that led to my first client, my biggest client, my book deal, and three of my current ventures.</p>
+
+<p><strong>The LinkedIn Power Score™.</strong> A diagnostic assessment that quantifies how effectively someone uses LinkedIn across profile optimization, content strategy, network quality, and engagement patterns. We built this into a web assessment at linkedinpowerscore.com and later started developing a Chrome extension to deliver the scoring in real-time.</p>
+
+<p>None of these frameworks were invented for the book. They were discovered through doing the work and named during the writing process. That's the part of co-authoring that surprised me most — the writing itself is a thinking tool. You don't just document what you know. You discover what you know.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">What Tony Taught Me</h2>
+
+<p>Working with Tony for months on a project this intensive taught me things I didn't expect.</p>
+
+<p><strong>Intentionality is a system, not a mindset.</strong> Tony doesn't just talk about being intentional. Every part of how he operates — his schedule, his communication, his environment — is designed for output. When I visited his home office, everything had a place and a purpose. It wasn't decorative. It was functional in a way that made you realize most people's "productivity systems" are just aspirational lists.</p>
+
+<p><strong>The meta-strategy matters more than the strategy.</strong> Tony's coaching framework isn't "do these 10 things." It's "achieve clarity on what matters, focus on those things exclusively, then execute with precision." Clarity → Focus → Execution. That's the meta-strategy. Everything else is tactics. I've applied this framework to every venture since — if I can't articulate what a company does and who it's for in one clear sentence, I'm not ready to build it.</p>
+
+<p><strong>Collaboration with someone better than you accelerates everything.</strong> Tony has been where I'm trying to go. Working alongside him didn't just improve the book — it recalibrated my standards. His intellectual rigor and his insistence on making every paragraph earn its place forced me to be sharper than I would have been on my own.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">From Book to Platform: Skill Refinery</h2>
+
+<p>Here's where it gets interesting.</p>
+
+<p>After the book was published, I had a realization that changed my trajectory. Tony has 125+ books, decades of coaching frameworks, proprietary methodologies, and training programs. All of it is trapped in static formats — PDFs, physical books, recorded sessions, slide decks. The knowledge exists, but it doesn't scale beyond Tony's personal availability.</p>
+
+<p>Meanwhile, AI tools are exploding. Claude, ChatGPT, Microsoft Copilot — millions of professionals are using these tools daily. But the coaching and professional development industry, which is worth $100B+, has zero AI-native delivery infrastructure. Coaches sell time. Authors sell copies. Neither model scales.</p>
+
+<p>I saw the gap.</p>
+
+<p>What if Tony's frameworks — and the frameworks of every expert like him — could be delivered inside the AI tools people already use? Not as a chatbot. Not as a PDF uploaded to ChatGPT. As structured coaching skills delivered through MCP (Model Context Protocol) that adapt to the user's actual situation.</p>
+
+<p>I built the proof of concept in a single weekend. 72 hours. The entire RESULTS Faster platform — Tony's coaching methodology converted into AI-native skill cards that could be accessed directly inside Claude, ChatGPT, and Copilot. Users don't leave their workflow. The coaching comes to them.</p>
+
+<p>Tony's reaction confirmed the thesis. This wasn't just a cool demo. This was a business.</p>
+
+<p>I rebranded from RESULTS Faster (the Tony Jeary-specific proof of concept) to Skill Refinery (the platform company). Built the self-serve extraction engine — experts drag-and-drop their book, course, or audiobook, and the AI identifies discrete teachable skills, classifies them by type and topic, assigns tiers, and packages them into marketplace-ready skill cards.</p>
+
+<p>The financial model projects a path to $2.26M ARR by month 36 at 85-95% gross margins. Those margins are real because the delivery infrastructure is AI — no human coaches needed for the actual skill delivery.</p>
+
+<div class="post-divider"></div>
+
+<h2 class="post-h2">The Lesson</h2>
+
+<p>A selfie at a networking event turned into a co-authored book, which turned into a platform company that could reach $2M+ in revenue.</p>
+
+<p>I'm not sharing that as a "networking is powerful" platitude. I'm sharing it because the sequence matters. I didn't pitch Tony on a startup. I built a relationship over years, co-created something valuable (the book), proved I could execute, and then saw an opportunity that served both of us. The platform came from the partnership. The partnership came from the work. The work came from showing up and building.</p>
+
+<p>Tony's mentors include Jim Rohn, Zig Ziglar, Brian Tracy, Stephen Covey, and Tom Hopkins. He told me they taught him that true success is about lifting others up. That philosophy runs through everything we built together — the book helps people transform LinkedIn from a static profile into a revenue engine, and Skill Refinery helps experts transform their knowledge from static books into AI-native coaching that scales without limits.</p>
+
+<p>The through-line is the same one that connects everything I build. Take what you've learned. Package it. Ship it. Make it accessible to people who need it.</p>
+
+<div class="post-divider"></div>
+
+<p><em>I'm Matt Cretzman. Tomorrow I'm writing about the philosophy behind all of it — what "Keep Building" actually means and why it's not just a slogan.</em></p>
+
+<p><em>Follow along at <a href="https://mattcretzman.com/blog">mattcretzman.com/blog</a>. Connect on <a href="https://linkedin.com/in/mattcretzman">LinkedIn</a>. Check out <a href="https://skillrefinery.ai">Skill Refinery</a> if you're a coach, author, or expert with IP that should be more accessible than a PDF.</em></p>
+    <div class="post-author">
+      <div class="post-author-avatar">M</div>
+      <div class="post-author-info">
+        <h4>Matt Cretzman</h4>
+        <p>Founder, Stormbreaker Digital · AI Systems Builder · Fractional CMO</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="post-nav">
+  <div class="container-narrow">
+    <div class="post-nav-inner">
+      <a href="/blog/" class="btn-ghost">← Back to Writing</a>
+      <a href="/work-with-me.html" class="btn-outline">Work With Me →</a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div><a href="/" class="footer-logo">Matt <span>Cretzman</span></a><div class="footer-tagline">Builder. GTM Engineer. AI Systems Architect.</div></div>
+      <div class="footer-links"><a href="/about.html">About</a><a href="/ventures/">Ventures</a><a href="/work-with-me.html">Work With Me</a><a href="/blog/">Writing</a><a href="https://stormbreakerdigital.com">Stormbreaker Digital</a><a href="https://linkedin.com/in/mattcretzman">LinkedIn</a></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2026 Matt Cretzman. All rights reserved.</div><div class="footer-copy">Built with Claude, Cursor, and Vercel.</div></div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', scrollY > 20));
+</script>
+</body>
+</html>
