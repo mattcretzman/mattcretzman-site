@@ -1,0 +1,405 @@
+{
+  "id": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+  "name": "Blog Cross-Post Generator",
+  "active": false,
+  "nodes": [
+    {
+      "id": "11111111-1111-1111-1111-111111111111",
+      "name": "Blog URL Form",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        240,
+        400
+      ],
+      "parameters": {
+        "formTitle": "Blog Cross-Post Generator",
+        "formDescription": "Paste a published blog URL to generate platform-native versions for Medium, dev.to, LinkedIn, and Substack.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Blog Post URL",
+              "fieldType": "text",
+              "requiredField": true,
+              "placeholder": "https://mattcretzman.com/blog/keep-building-philosophy.html"
+            }
+          ]
+        },
+        "options": {
+          "responseMode": "responseNode"
+        }
+      },
+      "webhookId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    },
+    {
+      "id": "22222222-2222-2222-2222-222222222222",
+      "name": "Fetch Blog Page",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        460,
+        400
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $json['Blog Post URL'] }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "33333333-3333-3333-3333-333333333333",
+      "name": "Extract & Build Prompts",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        680,
+        400
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const html = $input.first().json.data || $input.first().json.body || '';\nconst formUrl = $('Blog URL Form').first().json['Blog Post URL'];\n\n// Extract title\nconst titleMatch = html.match(/<h1[^>]*class=\"post-title\"[^>]*>([\\s\\S]*?)<\\/h1>/i)\n  || html.match(/<h1[^>]*>([\\s\\S]*?)<\\/h1>/i)\n  || html.match(/<title>(.*?)(?:\\s*\\|.*)?<\\/title>/i);\nconst rawTitle = titleMatch ? titleMatch[1].replace(/<[^>]*>/g, '').trim() : 'Untitled';\n\n// Extract slug from URL\nconst slug = formUrl.split('/').filter(Boolean).pop().replace('.html', '');\nconst canonicalUrl = `https://mattcretzman.com/blog/${slug}.html`;\n\n// Strip HTML to clean text\nlet body = html\n  .replace(/<script[\\s\\S]*?<\\/script>/gi, '')\n  .replace(/<style[\\s\\S]*?<\\/style>/gi, '')\n  .replace(/<nav[\\s\\S]*?<\\/nav>/gi, '')\n  .replace(/<footer[\\s\\S]*?<\\/footer>/gi, '')\n  .replace(/<div[^>]*class=\"post-author\"[\\s\\S]*?<\\/div>/gi, '')\n  .replace(/<div[^>]*class=\"post-nav\"[\\s\\S]*?<\\/div>/gi, '')\n  .replace(/<h([1-6])[^>]*>([\\s\\S]*?)<\\/h[1-6]>/gi, (m, level, text) => '\\n' + '#'.repeat(parseInt(level)) + ' ' + text.replace(/<[^>]*>/g, '') + '\\n\\n')\n  .replace(/<p[^>]*>([\\s\\S]*?)<\\/p>/gi, '$1\\n\\n')\n  .replace(/<li[^>]*>([\\s\\S]*?)<\\/li>/gi, '- $1\\n')\n  .replace(/<br\\s*\\/?>/gi, '\\n')\n  .replace(/<strong[^>]*>([\\s\\S]*?)<\\/strong>/gi, '**$1**')\n  .replace(/<em[^>]*>([\\s\\S]*?)<\\/em>/gi, '*$1*')\n  .replace(/<code[^>]*>([\\s\\S]*?)<\\/code>/gi, '`$1`')\n  .replace(/<a[^>]*href=\"([^\"]*)\"[^>]*>([\\s\\S]*?)<\\/a>/gi, '[$2]($1)')\n  .replace(/<[^>]*>/g, '')\n  .replace(/&amp;/g, '&')\n  .replace(/&lt;/g, '<')\n  .replace(/&gt;/g, '>')\n  .replace(/&quot;/g, '\"')\n  .replace(/&#39;/g, \"'\")\n  .replace(/&nbsp;/g, ' ')\n  .replace(/\\n{3,}/g, '\\n\\n')\n  .trim();\n\nconst mediumPrompt = `Convert this blog post into a Medium article.\n\nRULES:\n- Keep the full content — do NOT summarize or shorten\n- Add this attribution at the very top, before anything else: \"*Originally published at [mattcretzman.com](${canonicalUrl})*\"\n- Then a blank line, then the full article with title as H1\n- Add this footer at the very end: \"---\\\\n\\\\n*Originally published at [mattcretzman.com](${canonicalUrl})*\"\n- First line of your response must be: TAGS: tag-one, tag-two, tag-three, tag-four, tag-five (exactly 5 Medium tags, lowercase, hyphens OK)\n- Then blank line, then the full article\n\nVOICE: This is Matt Cretzman's content. He writes like a builder talking to builders — direct, specific, conversational. Short paragraphs. Fragments are fine. Em dashes over parentheses. No corporate speak. Keep his voice exactly as-is — you're reformatting, not rewriting.\n\nBLOG POST:\nTitle: ${rawTitle}\nURL: ${canonicalUrl}\n\n${body}`;\n\nconst devtoPrompt = `Convert this blog post into a dev.to article.\n\nRULES:\n- If this post is NOT technical (does not involve AI architecture, code, APIs, automation, SaaS building, or developer tooling), respond with ONLY: NOT_TECHNICAL\n- If technical, output dev.to frontmatter at the top:\n---\ntitle: ${rawTitle}\npublished: true\ndescription: [Write a 150-character description]\ntags: tag1, tag2, tag3, tag4\ncanonical_url: ${canonicalUrl}\n---\n- Then the full markdown article body\n- Remove personal narrative sections not relevant to developers (keep technical depth, architecture, code, costs, mistakes sections)\n- Add footer: \"---\\\\n\\\\n*Originally published at [mattcretzman.com](${canonicalUrl})*\"\n\nVOICE: Matt Cretzman writes like a builder. Direct, specific, names the tools and stack. Short paragraphs. No fluff. Keep his voice exactly.\n\nBLOG POST:\nTitle: ${rawTitle}\nURL: ${canonicalUrl}\n\n${body}`;\n\nconst linkedinPrompt = `Convert this blog post into a LinkedIn post.\n\nRULES:\n- This is a LINKEDIN POST, not a blog repost. Rewrite it for the platform.\n- 800–1,300 characters maximum\n- First 2–3 lines must hook before \"see more\" — use a specific number, surprising result, or contrarian take\n- Short paragraphs (1–3 sentences). Lots of white space.\n- Use 'I' perspective throughout\n- End with 3–5 relevant hashtags\n- Second-to-last line: \"Full breakdown: ${canonicalUrl}\"\n- Do NOT include a title or subject line\n- No emojis unless they add clarity\n\nVOICE: Matt Cretzman's LinkedIn voice is punchy and compressed. He hooks with specific results ('3,522 leads for $1.08'), tells compressed build stories, lets numbers speak. He never says 'I'm excited to announce.' He says what happened.\n\nFORMAT: Output ONLY the LinkedIn post text. No commentary, no labels, no \"Here's the LinkedIn post:\".\n\nBLOG POST:\nTitle: ${rawTitle}\nURL: ${canonicalUrl}\n\n${body}`;\n\nconst substackPrompt = `Convert this blog post into a Substack newsletter edition.\n\nRULES:\n- This is a NEWSLETTER, not a blog repost. More personal — like writing to people who subscribed because they care about your work.\n- Keep the full substance but restructure for newsletter flow\n- Open with 1–2 sentences of personal setup before diving in — something like \"This week I shipped...\" or a quick context-setter that makes it feel like a letter\n- Maintain all specific numbers, tool names, and technical details\n- Add footer at the end:\n---\n\n*This was originally published on my blog at [mattcretzman.com](${canonicalUrl}). If someone forwarded this to you, you can subscribe to get future posts delivered directly.*\n\nVOICE: Matt Cretzman writes like a builder talking to builders. In newsletters, slightly warmer — these people opted in. Still direct, specific, no fluff. Short paragraphs. Em dashes. Names tools by name. The phrase \"Keep Building.\" can appear at the very end only if the content genuinely warrants it — use it sparingly.\n\nFORMAT: First line = newsletter subject line (can differ slightly from blog title). Then blank line. Then full newsletter body.\n\nBLOG POST:\nTitle: ${rawTitle}\nURL: ${canonicalUrl}\n\n${body}`;\n\nreturn [{\n  json: {\n    title: rawTitle,\n    slug,\n    canonical_url: canonicalUrl,\n    blog_url: formUrl,\n    body,\n    prompts: {\n      medium: mediumPrompt,\n      devto: devtoPrompt,\n      linkedin: linkedinPrompt,\n      substack: substackPrompt\n    }\n  }\n}];"
+      }
+    },
+    {
+      "id": "44444444-4444-4444-4444-444444444444",
+      "name": "Claude — Medium",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        400
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ model: \"claude-sonnet-4-5-20250929\", max_tokens: 4096, messages: [{ role: \"user\", content: $json.prompts.medium }] }) }}"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "1",
+          "name": "Anthropic API Key"
+        }
+      }
+    },
+    {
+      "id": "55555555-5555-5555-5555-555555555555",
+      "name": "Claude — dev.to",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1120,
+        400
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ model: \"claude-sonnet-4-5-20250929\", max_tokens: 4096, messages: [{ role: \"user\", content: $('Extract & Build Prompts').first().json.prompts.devto }] }) }}"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "1",
+          "name": "Anthropic API Key"
+        }
+      }
+    },
+    {
+      "id": "66666666-6666-6666-6666-666666666666",
+      "name": "Claude — LinkedIn",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1340,
+        400
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ model: \"claude-sonnet-4-5-20250929\", max_tokens: 4096, messages: [{ role: \"user\", content: $('Extract & Build Prompts').first().json.prompts.linkedin }] }) }}"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "1",
+          "name": "Anthropic API Key"
+        }
+      }
+    },
+    {
+      "id": "77777777-7777-7777-7777-777777777777",
+      "name": "Claude — Substack",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1560,
+        400
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ model: \"claude-sonnet-4-5-20250929\", max_tokens: 4096, messages: [{ role: \"user\", content: $('Extract & Build Prompts').first().json.prompts.substack }] }) }}"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "1",
+          "name": "Anthropic API Key"
+        }
+      }
+    },
+    {
+      "id": "88888888-8888-8888-8888-888888888888",
+      "name": "Build Results Page",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1780,
+        400
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const extracted = $('Extract & Build Prompts').first().json;\nconst title = extracted.title;\nconst canonicalUrl = extracted.canonical_url;\nconst slug = extracted.slug;\n\nconst getClaudeText = (nodeName) => {\n  try {\n    const resp = $(nodeName).first().json;\n    if (resp.content && resp.content[0] && resp.content[0].text) return resp.content[0].text;\n    return resp.body || resp.data || JSON.stringify(resp);\n  } catch(e) { return '[Error: ' + e.message + ']'; }\n};\n\nconst medium = getClaudeText('Claude — Medium');\nconst devtoRaw = getClaudeText('Claude — dev.to');\nconst linkedin = getClaudeText('Claude — LinkedIn');\nconst substack = getClaudeText('Claude — Substack');\nconst devto = devtoRaw.trim() === 'NOT_TECHNICAL' ? null : devtoRaw;\n\nconst generatedAt = new Date().toLocaleString('en-US', {\n  month: 'short', day: 'numeric', year: 'numeric',\n  hour: 'numeric', minute: '2-digit', timeZoneName: 'short'\n});\n\nconst esc = (str) => (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;');\n\nconst html = `<!DOCTYPE html>\n<html>\n<head>\n  <title>Cross-Post Ready</title>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <style>\n    *{box-sizing:border-box;margin:0;padding:0}\n    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f172a;color:#e2e8f0;padding:2rem;min-height:100vh}\n    .header{margin-bottom:2rem}\n    h1{font-size:1.4rem;font-weight:800;margin-bottom:.4rem;color:#f8fafc}\n    .subtitle{color:#64748b;font-size:.85rem}\n    .subtitle a{color:#60a5fa;text-decoration:none}\n    .platform{background:#1e293b;border-radius:12px;padding:1.5rem;margin-bottom:1.25rem;border:1px solid #334155}\n    .platform.na{opacity:.4}\n    .platform-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem}\n    .label{font-weight:700;font-size:.95rem;display:flex;align-items:center;gap:8px}\n    .label.medium{color:#22c55e}.label.devto{color:#818cf8}.label.linkedin{color:#3b82f6}.label.substack{color:#f97316}\n    .na-tag{font-size:.7rem;color:#475569;background:#0f172a;border:1px solid #334155;padding:2px 8px;border-radius:4px}\n    .copy-btn{background:#3b82f6;color:#fff;border:none;padding:.45rem 1rem;border-radius:6px;cursor:pointer;font-size:.8rem;font-weight:600;transition:background .15s}\n    .copy-btn:hover{background:#2563eb}.copy-btn.copied{background:#22c55e}\n    .box{background:#0f172a;border:1px solid #1e293b;border-radius:8px;padding:1rem;max-height:320px;overflow-y:auto;white-space:pre-wrap;font-family:'SF Mono','Fira Code',monospace;font-size:.78rem;line-height:1.6;color:#94a3b8}\n    .note{font-size:.72rem;color:#475569;margin-top:.5rem}\n  </style>\n</head>\n<body>\n  <div class=\"header\">\n    <h1>📋 ${esc(title)}</h1>\n    <p class=\"subtitle\">Canonical: <a href=\"${canonicalUrl}\" target=\"_blank\">${canonicalUrl}</a> &nbsp;·&nbsp; Generated ${generatedAt}</p>\n  </div>\n\n  <div class=\"platform\">\n    <div class=\"platform-header\">\n      <span class=\"label medium\">Medium</span>\n      <button class=\"copy-btn\" onclick=\"copy('m',this)\">Copy</button>\n    </div>\n    <div class=\"box\" id=\"m\">${esc(medium)}</div>\n    <p class=\"note\">⏱ Publish 48–72 hrs after blog (let Google index the original first). Set canonical URL in Medium's import settings.</p>\n  </div>\n\n  <div class=\"platform${devto ? '' : ' na'}\">\n    <div class=\"platform-header\">\n      <span class=\"label devto\">dev.to ${devto ? '' : '<span class=\"na-tag\">Not Technical — Skipped</span>'}</span>\n      ${devto ? '<button class=\"copy-btn\" onclick=\"copy(\\'d\\',this)\">Copy</button>' : ''}\n    </div>\n    ${devto ? `<div class=\"box\" id=\"d\">${esc(devto)}</div><p class=\"note\">⏱ Publish 48–72 hrs after blog. Set canonical_url in the frontmatter (already included).</p>` : ''}\n  </div>\n\n  <div class=\"platform\">\n    <div class=\"platform-header\">\n      <span class=\"label linkedin\">LinkedIn</span>\n      <button class=\"copy-btn\" onclick=\"copy('l',this)\">Copy</button>\n    </div>\n    <div class=\"box\" id=\"l\">${esc(linkedin)}</div>\n    <p class=\"note\">⏱ Post same day or next morning. Paste link in first comment, not in the post body.</p>\n  </div>\n\n  <div class=\"platform\">\n    <div class=\"platform-header\">\n      <span class=\"label substack\">Substack</span>\n      <button class=\"copy-btn\" onclick=\"copy('s',this)\">Copy</button>\n    </div>\n    <div class=\"box\" id=\"s\">${esc(substack)}</div>\n    <p class=\"note\">⏱ Send same day when ready. Subject line is the first line of the output above.</p>\n  </div>\n\n  <script>\n    function copy(id,btn){\n      const el=document.getElementById(id);\n      if(!el)return;\n      navigator.clipboard.writeText(el.textContent).then(()=>{\n        const t=btn.textContent;btn.textContent='Copied ✓';btn.classList.add('copied');\n        setTimeout(()=>{btn.textContent=t;btn.classList.remove('copied')},2000);\n      });\n    }\n  </script>\n</body>\n</html>`;\n\nreturn [{\n  json: {\n    title,\n    slug,\n    canonical_url: canonicalUrl,\n    generated_at: generatedAt,\n    devto_skipped: devto === null,\n    html\n  }\n}];"
+      }
+    },
+    {
+      "id": "99999999-9999-9999-9999-999999999999",
+      "name": "Log to Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.3,
+      "position": [
+        2000,
+        400
+      ],
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SPREADSHEET_ID_HERE",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Slug": "={{ $json.slug }}",
+            "Title": "={{ $('Extract & Build Prompts').first().json.title }}",
+            "Canonical URL": "={{ $('Extract & Build Prompts').first().json.canonical_url }}",
+            "Generated": "={{ $json.generated_at }}",
+            "Medium": "⬜ Ready",
+            "dev.to": "={{ $json.devto_skipped ? '➖ N/A' : '⬜ Ready' }}",
+            "LinkedIn": "⬜ Ready",
+            "Substack": "⬜ Ready"
+          }
+        },
+        "options": {}
+      },
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "2",
+          "name": "Google Sheets Account"
+        }
+      }
+    },
+    {
+      "id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        2220,
+        400
+      ],
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $('Build Results Page').first().json.html }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Blog URL Form": {
+      "main": [
+        [
+          {
+            "node": "Fetch Blog Page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Blog Page": {
+      "main": [
+        [
+          {
+            "node": "Extract & Build Prompts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract & Build Prompts": {
+      "main": [
+        [
+          {
+            "node": "Claude — Medium",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude — Medium": {
+      "main": [
+        [
+          {
+            "node": "Claude — dev.to",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude — dev.to": {
+      "main": [
+        [
+          {
+            "node": "Claude — LinkedIn",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude — LinkedIn": {
+      "main": [
+        [
+          {
+            "node": "Claude — Substack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude — Substack": {
+      "main": [
+        [
+          {
+            "node": "Build Results Page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Results Page": {
+      "main": [
+        [
+          {
+            "node": "Log to Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log to Sheets": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
