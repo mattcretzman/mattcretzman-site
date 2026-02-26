@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TextEvidence: I Shipped a Legal Tech Platform Because I Couldn't Stop Thinking About It | Matt Cretzman</title>
+<meta name="description" content="3,000 screenshots. One week of paralegal time. A grocery bag full of printed texts. Here's how that problem became a production legal tech platform with 46 database tables and 432 attorneys in active outbound.">
+<link rel="canonical" href="https://mattcretzman.com/blog/textevidence-legal-tech-platform.html">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  .post-hero { padding: 140px 0 60px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+  .post-hero-glow { position: absolute; top: 0; left: -20%; width: 700px; height: 500px; background: radial-gradient(ellipse, #f9731608, transparent 65%); pointer-events: none; }
+  .post-meta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
+  .post-date { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .post-readtime { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .post-title { font-family: var(--font-display); font-size: clamp(32px, 5vw, 60px); font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 20px; }
+  .post-subtitle { font-size: 19px; color: var(--text-secondary); max-width: 640px; line-height: 1.65; }
+  .post-body { padding: 72px 0 100px; }
+  .post-body p { color: var(--text-secondary); font-size: 18px; line-height: 1.85; margin-bottom: 24px; }
+  .post-body p strong { color: var(--text-primary); font-weight: 600; }
+  .post-body p a { color: var(--accent-orange); text-decoration: none; border-bottom: 1px solid #f9731630; transition: border-color 0.2s; }
+  .post-body p a:hover { border-color: var(--accent-orange); }
+  .post-h2 { font-family: var(--font-display); font-size: clamp(22px, 3vw, 32px); font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary); margin: 56px 0 20px; line-height: 1.2; }
+  .post-h3 { font-family: var(--font-display); font-size: clamp(18px, 2.5vw, 22px); font-weight: 700; letter-spacing: -0.01em; color: var(--text-primary); margin: 40px 0 14px; line-height: 1.3; }
+  .post-divider { height: 1px; background: var(--border); margin: 48px 0; }
+  .post-list { color: var(--text-secondary); font-size: 17px; line-height: 1.8; margin: 0 0 24px 24px; }
+  .post-list li { margin-bottom: 8px; }
+  .post-list li strong { color: var(--text-primary); font-weight: 600; }
+  .post-list a { color: var(--accent-orange); text-decoration: none; border-bottom: 1px solid #f9731630; }
+  .post-code { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px 28px; margin: 28px 0; overflow-x: auto; }
+  .post-code code { font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); line-height: 1.7; white-space: pre; }
+  .post-inline-code { font-family: var(--font-mono); font-size: 14px; color: var(--accent-orange); background: var(--accent-orange-dim); padding: 2px 7px; border-radius: var(--radius-sm); border: 1px solid #f9731630; }
+  .post-table-wrap { overflow-x: auto; margin: 28px 0; }
+  .post-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .post-table th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); background: var(--bg-elevated); border: 1px solid var(--border); padding: 10px 16px; text-align: left; }
+  .post-table td { color: var(--text-secondary); border: 1px solid var(--border); padding: 10px 16px; line-height: 1.5; }
+  .post-table tr:hover td { background: var(--bg-card); }
+  .post-nav { padding: 40px 0; border-top: 1px solid var(--border); }
+  .post-nav-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  .post-author { display: flex; align-items: center; gap: 16px; padding: 32px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-xl); margin-top: 60px; }
+  .post-author-info h4 { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+  .post-author-info p { font-size: 13px; color: var(--text-muted); margin: 0; font-family: var(--font-mono); }
+  .post-author-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--accent-orange-dim); border: 2px solid var(--accent-orange); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; font-size: 18px; color: var(--accent-orange); flex-shrink: 0; }
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="/" class="nav-logo">Matt <span>Cretzman</span></a>
+  <ul class="nav-links">
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/ventures/">Ventures</a></li>
+    <li><a href="/blog/" class="active">Writing</a></li>
+    <li><a href="/work-with-me.html" class="nav-cta">Work With Me →</a></li>
+  </ul>
+</nav>
+
+<div class="post-hero">
+  <div class="post-hero-glow"></div>
+  <div class="container-narrow">
+    <div class="post-meta">
+      <span class="badge badge-blue">Build Stories</span>
+      <span class="post-date">February 2026</span>
+      <span class="post-readtime">· 10 min read</span>
+    </div>
+    <h1 class="post-title">TextEvidence: I Shipped a Legal Tech Platform Because I Couldn't Stop Thinking About It</h1>
+    <p class="post-subtitle">3,000 screenshots. One week of paralegal time. A grocery bag full of printed texts. Here's how that problem became a production legal tech platform with 46 database tables and 432 attorneys in active outbound.</p>
+  </div>
+</div>
+
+<div class="post-body">
+  <div class="container-narrow">
+    <p>A family law attorney told me about a client who showed up to a meeting with a grocery bag full of printed screenshots. Three thousand text messages. One week of paralegal time just to sort them chronologically. And the attorney still couldn't cite a specific message in her filing because nothing was numbered.</p>
+
+<p>I couldn't stop thinking about it.</p>
+
+<h2 class="post-h2">The Problem That Wouldn't Leave Me Alone</h2>
+
+<p>Text message evidence is everywhere in family law. Custody disputes, divorce proceedings, protective order cases — the critical evidence lives in iMessage threads and WhatsApp conversations. But getting that evidence into court-ready format is a manual nightmare.</p>
+
+<p>Here's what the process looks like without purpose-built tools: clients send attorneys hundreds of disorganized screenshots. Sometimes they email them. Sometimes they drop them into a Google Drive folder. Sometimes — and I'm not making this up — someone's aunt prints them out at Staples.</p>
+
+<p>Paralegals spend entire afternoons organizing messages chronologically. There's no way to cite specific messages in filings because nothing has line numbers. And the attorney has to spot patterns across thousands of messages by reading every single one.</p>
+
+<p>The alternative is forensic extraction software like Cellebrite — which costs $6,000+ and is overkill for family law. It's built for criminal investigations, not custody disputes.</p>
+
+<p>There's a massive gap between "400 screenshots in a Google Drive folder" and "$6,000 forensic extraction." That gap is where TextEvidence lives.</p>
+
+<h2 class="post-h2">What I Built</h2>
+
+<p>TextEvidence lets attorneys upload text message screenshots. The platform uses OCR to extract message content, automatically assigns sequential line numbers for court citation, organizes messages chronologically, and runs AI analysis to identify communication patterns relevant to the case.</p>
+
+<p>The AI — powered by Claude Sonnet — looks for the specific patterns family courts care about: hostility and contempt, manipulation tactics, co-parenting cooperation or the lack of it, scheduling compliance, and financial discussions. The output is a clean, numbered exhibit for court plus an analysis summary highlighting relevant patterns.</p>
+
+<p>Upload screenshots. Get court-ready exhibits. In under 60 seconds.</p>
+
+<p>That last number matters. I've tested the processing pipeline against datasets of 100,000+ messages. It handles them. The platform wasn't built for small cases — it was built to scale.</p>
+
+<h2 class="post-h2">46 Database Tables in Production</h2>
+
+<p>I'm a firm believer that the complexity of your database reflects the seriousness of your product.</p>
+
+<p>TextEvidence has 46 tables in production. Organizations, users, cases, message archives, conversations, messages, AI conversation threads, AI analysis results, communication insights, emotional timelines, behavioral patterns, key moments, message sentiment, contact connections, plan limits, monthly usage tracking — and 28 more supporting tables. Full Row Level Security policies across all of them.</p>
+
+<p>This isn't a wrapper around an API call. It's an enterprise-grade data model built for attorney-client privilege considerations, multi-user access within law firms, and the kind of nuanced analysis that family courts actually need.</p>
+
+<p>I built the full SaaS platform — authentication, billing, AI analysis, PDF export, client portal — in approximately three weeks. That's the velocity that AI-assisted development enables when you have clear specs and know what you're building.</p>
+
+<h2 class="post-h2">The 7-Agent Content Engine</h2>
+
+<p>Here's where TextEvidence became more than just a product. It became a proving ground.</p>
+
+<p>I built an autonomous content engine on OpenClaw — my multi-agent framework — with five specialized AI roles: Keyword Researcher, Content Writer, SEO Editor, Publisher, and Performance Monitor. Each role has its own skill file, its own tools, and its own quality gates. The system runs on cron schedules and produces 3 to 5 SEO-optimized blog posts per week without human intervention.</p>
+
+<p>But this isn't "AI writing blog posts." It's a complete pipeline. The Keyword Researcher identifies clusters. The Content Writer drafts based on brand voice guidelines and a target SEO score of 94/100. The SEO Editor refines. The Publisher deploys. The Performance Monitor tracks and feeds learnings back into the system.</p>
+
+<p>The agents can update their own skill files based on performance data. The system gets better over time without me touching it.</p>
+
+<p>A companion social media agent repurposes blog content into platform-native posts — triggered automatically when a blog publishes. The whole system compounds.</p>
+
+<p>Everything I learned building this engine for TextEvidence now powers content operations across multiple ventures. The product shipped, but the methodology shipped even harder.</p>
+
+<h2 class="post-h2">Claudia: The AI SDR Who Handles Replies</h2>
+
+<p>When it came time to go to market, I didn't want to hire an SDR. I wanted to build one.</p>
+
+<p>Claudia Reyes — claudia@textevidence.ai — is an AI sales development representative who handles all reply management from the outbound campaign. She operates under a comprehensive Standard Operating Procedure with eight response categories, CRM integration through GoHighLevel, escalation protocols, a daily workflow schedule, and answers to frequently asked questions.</p>
+
+<p>What makes Claudia different from most AI sales agents: the "What I Do Not Know" section. I explicitly defined the boundaries where the AI should escalate to me rather than make something up. Claudia doesn't hallucinate pricing. She doesn't invent features. She doesn't promise things I can't deliver. She handles what she can and routes the rest to a human.</p>
+
+<p>That's the part most people get wrong with AI sales agents. They try to make the AI handle everything. The real skill is defining what it should <em>not</em> do.</p>
+
+<h2 class="post-h2">The 432-Attorney Campaign</h2>
+
+<p>The outbound campaign targets 432 Texas family law attorneys across LinkedIn, email, and Twitter/X — five touches over 23 days. Each touch has a distinct purpose and personality. The product isn't mentioned until Touch 3. Free licenses are held back until the reply conversation.</p>
+
+<p>This is the Delightful Outbound approach in action — earn the right to pitch through observational humor, genuine curiosity, and understanding their daily reality. The empathy research for this campaign went deep: what their Tuesday at 2pm looks like, things clients do that drive them quietly crazy, inside jokes about evidence preparation, specific scenarios that became campaign hooks.</p>
+
+<p>The campaign launched February 18, 2026. Goal: 10 to 15 demos, 2 to 5 conversions.</p>
+
+<h2 class="post-h2">The Numbers</h2>
+
+<p>Here's where TextEvidence stands:</p>
+
+<ul class="post-list">
+<p>  <li>46 database tables in production</li>   <li>102,640+ messages processed in test datasets</li>   <li>Processing pipeline handles uploads in under 60 seconds</li>   <li>Three pricing tiers: $79/month Starter, $149/month Professional, $399/month Firm</li>   <li>14-day free trial with Pro-level access</li>   <li>90-day free beta via Stripe coupon</li>   <li>7+ keyword clusters targeted across family law evidence topics</li>   <li>Active outbound campaign targeting 432 attorneys</li> </ul></p>
+
+<p>The market opportunity is real: 1.1 million divorces filed in the US annually. 47 million divorce-related online searches in 2024 — the highest ever recorded. The co-parenting app market is projected to hit $1.12 billion by 2032.</p>
+
+<p>And there's a distribution play I'm watching closely: Clio's platform has 150,000+ users, and their App Directory provides a direct channel to the exact attorneys who need this.</p>
+
+<h2 class="post-h2">What TextEvidence Taught Me</h2>
+
+<p>Every venture I build teaches me something that compounds into the next one. TextEvidence taught me that the go-to-market methodology is as valuable as the product.</p>
+
+<p>The Delightful Outbound approach I developed for this campaign? It's now a codified AI skill file I use across every venture. The PRD Builder skill I created for writing specs? Same thing. The LinkedIn Profile Optimization methodology? Codified.</p>
+
+<p>TextEvidence is both a product and a methodology laboratory. Every framework I develop for one engagement gets extracted, documented, and deployed across the whole ecosystem.</p>
+
+<p>The platform processes text evidence for attorneys. But the real output is a set of repeatable systems that make the next thing I build faster and sharper.</p>
+
+<p>That's the part I love most about being a builder — the compounding.</p>
+    <div class="post-author">
+      <div class="post-author-avatar">M</div>
+      <div class="post-author-info">
+        <h4>Matt Cretzman</h4>
+        <p>Founder, Stormbreaker Digital · AI Systems Builder · Fractional CMO</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="post-nav">
+  <div class="container-narrow">
+    <div class="post-nav-inner">
+      <a href="/blog/" class="btn-ghost">← Back to Writing</a>
+      <a href="/work-with-me.html" class="btn-outline">Work With Me →</a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div><a href="/" class="footer-logo">Matt <span>Cretzman</span></a><div class="footer-tagline">Builder. GTM Engineer. AI Systems Architect.</div></div>
+      <div class="footer-links"><a href="/about.html">About</a><a href="/ventures/">Ventures</a><a href="/work-with-me.html">Work With Me</a><a href="/blog/">Writing</a><a href="https://stormbreakerdigital.com">Stormbreaker Digital</a><a href="https://linkedin.com/in/mattcretzman">LinkedIn</a></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2026 Matt Cretzman. All rights reserved.</div><div class="footer-copy">Built with Claude, Cursor, and Vercel.</div></div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', scrollY > 20));
+</script>
+</body>
+</html>

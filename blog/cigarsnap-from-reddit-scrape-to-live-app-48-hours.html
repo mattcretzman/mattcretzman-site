@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CigarSnap: From $1.08 Reddit Scrape to Live App in 48 Hours | Matt Cretzman</title>
+<meta name="description" content="How I validated a cigar AI app with a $1.08 Reddit scrape, built 15+ features in 48 hours, and designed a Trojan Horse B2B revenue model hiding inside a consumer app.">
+<link rel="canonical" href="https://mattcretzman.com/blog/cigarsnap-from-reddit-scrape-to-live-app-48-hours.html">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  .post-hero { padding: 140px 0 60px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+  .post-hero-glow { position: absolute; top: 0; left: -20%; width: 700px; height: 500px; background: radial-gradient(ellipse, #f9731608, transparent 65%); pointer-events: none; }
+  .post-meta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
+  .post-date { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .post-readtime { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .post-title { font-family: var(--font-display); font-size: clamp(32px, 5vw, 60px); font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 20px; }
+  .post-subtitle { font-size: 19px; color: var(--text-secondary); max-width: 640px; line-height: 1.65; }
+  .post-body { padding: 72px 0 100px; }
+  .post-body p { color: var(--text-secondary); font-size: 18px; line-height: 1.85; margin-bottom: 24px; }
+  .post-body p strong { color: var(--text-primary); font-weight: 600; }
+  .post-body p a { color: var(--accent-orange); text-decoration: none; border-bottom: 1px solid #f9731630; transition: border-color 0.2s; }
+  .post-body p a:hover { border-color: var(--accent-orange); }
+  .post-h2 { font-family: var(--font-display); font-size: clamp(22px, 3vw, 32px); font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary); margin: 56px 0 20px; line-height: 1.2; }
+  .post-h3 { font-family: var(--font-display); font-size: clamp(18px, 2.5vw, 22px); font-weight: 700; letter-spacing: -0.01em; color: var(--text-primary); margin: 40px 0 14px; line-height: 1.3; }
+  .post-divider { height: 1px; background: var(--border); margin: 48px 0; }
+  .post-list { color: var(--text-secondary); font-size: 17px; line-height: 1.8; margin: 0 0 24px 24px; }
+  .post-list li { margin-bottom: 8px; }
+  .post-list li strong { color: var(--text-primary); font-weight: 600; }
+  .post-list a { color: var(--accent-orange); text-decoration: none; border-bottom: 1px solid #f9731630; }
+  .post-code { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px 28px; margin: 28px 0; overflow-x: auto; }
+  .post-code code { font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); line-height: 1.7; white-space: pre; }
+  .post-inline-code { font-family: var(--font-mono); font-size: 14px; color: var(--accent-orange); background: var(--accent-orange-dim); padding: 2px 7px; border-radius: var(--radius-sm); border: 1px solid #f9731630; }
+  .post-table-wrap { overflow-x: auto; margin: 28px 0; }
+  .post-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .post-table th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); background: var(--bg-elevated); border: 1px solid var(--border); padding: 10px 16px; text-align: left; }
+  .post-table td { color: var(--text-secondary); border: 1px solid var(--border); padding: 10px 16px; line-height: 1.5; }
+  .post-table tr:hover td { background: var(--bg-card); }
+  .post-nav { padding: 40px 0; border-top: 1px solid var(--border); }
+  .post-nav-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  .post-author { display: flex; align-items: center; gap: 16px; padding: 32px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-xl); margin-top: 60px; }
+  .post-author-info h4 { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+  .post-author-info p { font-size: 13px; color: var(--text-muted); margin: 0; font-family: var(--font-mono); }
+  .post-author-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--accent-orange-dim); border: 2px solid var(--accent-orange); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; font-size: 18px; color: var(--accent-orange); flex-shrink: 0; }
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="/" class="nav-logo">Matt <span>Cretzman</span></a>
+  <ul class="nav-links">
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/ventures/">Ventures</a></li>
+    <li><a href="/blog/" class="active">Writing</a></li>
+    <li><a href="/work-with-me.html" class="nav-cta">Work With Me →</a></li>
+  </ul>
+</nav>
+
+<div class="post-hero">
+  <div class="post-hero-glow"></div>
+  <div class="container-narrow">
+    <div class="post-meta">
+      <span class="badge badge-blue">Build Stories</span>
+      <span class="post-date">February 2026</span>
+      <span class="post-readtime">· 9 min read</span>
+    </div>
+    <h1 class="post-title">CigarSnap: From $1.08 Reddit Scrape to Live App in 48 Hours</h1>
+    <p class="post-subtitle">How I validated a cigar AI app with a $1.08 Reddit scrape, built 15+ features in 48 hours, and designed a Trojan Horse B2B revenue model hiding inside a consumer app.</p>
+  </div>
+</div>
+
+<div class="post-body">
+  <div class="container-narrow">
+    <p>On December 27, 2024, I heard Greg Isenberg break down mobile apps generating $50K+ in monthly recurring revenue using AI. By the time the episode ended, I had a thesis. Seventy-two hours later, I had a production app with 15+ features.</p>
+
+<p>This is how CigarSnap went from a podcast moment to a live platform — and why the real money isn't where you'd expect.</p>
+
+<h2 class="post-h2">The Isenberg Framework: Five Criteria Before a Single Line of Code</h2>
+
+<p>I don't build things because they sound cool. I build things that survive contact with a framework. Isenberg's five-criteria filter for AI mobile app opportunities is how I evaluate ideas before writing anything:</p>
+
+<ol class="post-list">
+<p>  <li>The audience actively spends money.</li>   <li>A repeating problem exists.</li>   <li>The solution involves photo or video input.</li>   <li>Accuracy matters enough to pay for.</li>   <li>Existing tools are weak.</li> </ol></p>
+
+<p>Cigars scored on all five.</p>
+
+<p>Premium cigar enthusiasts — mostly men, 35 to 65, high disposable income — already spend hundreds on their hobby. They buy cigars repeatedly, visit lounges regularly, and want to know what they're smoking. A photo-based identification tool solves a real, recurring problem. And the existing apps? Manual databases where you type in what you're smoking. No AI. No image recognition. Desktop-first designs from a decade ago.</p>
+
+<p>The market was begging for something modern.</p>
+
+<h2 class="post-h2">$1.08 for 3,522 Qualified Leads</h2>
+
+<p>Before building anything, I needed to know the audience was real and reachable. So I ran an Apify scrape on Reddit's r/cigars community — 221,000+ members, actively posting, deeply engaged.</p>
+
+<p>Total cost: $1.08.</p>
+
+<p>That scrape returned 3,522 qualified users. Real people talking about cigars daily, recommending brands, sharing humidor photos, reviewing blends. Not emails purchased from a list broker. Actual enthusiasts who'd raised their hand by participating in the community.</p>
+
+<p>Market validation doesn't have to be expensive. It has to be honest.</p>
+
+<h2 class="post-h2">The 48-Hour Sprint</h2>
+
+<p>With the framework validated and the audience confirmed, I went to Replit Agent and started building.</p>
+
+<p>I wrote approximately 12 complete, copy-paste-ready prompts — each one a full feature specification with database schemas, API routes, UI components, and integration points. Not vague descriptions. Production-ready specs that an AI coding assistant could execute without guessing.</p>
+
+<p>In 48 hours, I shipped:</p>
+
+<ul class="post-list">
+<p>  <li>AI cigar identification via Claude Vision API</li>   <li>A digital humidor with collection tracking</li>   <li>A smoking journal with the "Three Thirds" flavor education system — the app calculates smoke time based on ring gauge and length, then prompts tasting notes at 33% and 66% to teach flavor transitions</li>   <li>A social community feed</li>   <li>A lounge finder with 138+ Texas venues mapped</li>   <li>A gamification system with 47 achievement badges across 10 categories</li>   <li>Daily leaderboards with a "Scan of the Day" algorithm</li>   <li>Shareable cards for social media</li>   <li>A referral engine</li>   <li>RevenueCat subscription integration</li> </ul></p>
+
+<p>That's not a prototype. That's a product.</p>
+
+<h2 class="post-h2">Don Carlos: The AI Concierge Who Remembers Your Humidor</h2>
+
+<p>Most AI integrations in consumer apps feel like an afterthought — a chatbot bolted onto the side. I wanted something different.</p>
+
+<p>Don Carlos is a branded AI persona powered by Claude Sonnet. Named after the Arturo Fuente Don Carlos line, he's a distinguished gentleman who greets you with Spanish time-of-day greetings — "Buenas tardes, señor" — and has full visibility into your humidor and tasting history.</p>
+
+<p>He doesn't just answer questions. He knows what you've smoked, what you rated highly, and what's sitting in your humidor right now. He suggests pairings, identifies cigars from photos when direct scanning fails, and delivers recommendations with butler-like hospitality: "Welcome home, sir. Your collection awaits."</p>
+
+<p>The goal was to make Don Carlos feel like a knowledgeable friend at a premium lounge — warm, opinionated, genuinely helpful. Not a generic chatbot. A character.</p>
+
+<p>Branded AI personas are the future of consumer apps. If your AI layer doesn't have a personality, you're leaving engagement on the table.</p>
+
+<h2 class="post-h2">The Trojan Horse: Why the Consumer App Isn't the Business</h2>
+
+<p>Here's where most people get the CigarSnap story wrong. They think it's a consumer app. It is — on the surface. But the consumer app is the tip of the spear.</p>
+
+<p>The real revenue comes from B2B lounge partnerships.</p>
+
+<p>Think about it from a lounge owner's perspective. CigarSnap's lounge finder is driving foot traffic to their venue. Users are checking in, scanning cigars, leaving reviews, sharing experiences. That data — which lounges are getting traffic, what cigars people are smoking there, when they visit — is incredibly valuable to the lounge operator.</p>
+
+<p>I built a Partner Portal where lounge owners can claim their profile, manage inventory, post offers to nearby users, and access analytics. Pricing tiers run from free to $149/month.</p>
+
+<p>The consumer app creates the audience. The B2B portal monetizes it. I call it the Trojan Horse Strategy — the free consumer experience generates the foot traffic data that lounges can't ignore, converting free listings into paid subscriptions at $49 to $149 per month.</p>
+
+<p>The consumer app is the moat. The B2B revenue is the castle.</p>
+
+<h2 class="post-h2">The Self-Building Asset Library</h2>
+
+<p>One more thing that makes CigarSnap defensible: when a user scans a cigar that doesn't have an image in the database, the system calls Google's Gemini to generate a photorealistic product photo. Studio lighting, wood background, accurate band details. That image gets stored and served to every future user who scans the same cigar.</p>
+
+<p>The community is unknowingly building a premium image library that would cost thousands to replicate manually. Cost to us: approximately $20 to $80 per 1,000 photorealistic images.</p>
+
+<p>Every scan makes the platform better. Every user adds to an asset that competitors would need significant investment to match.</p>
+
+<h2 class="post-h2">Current State and What's Next</h2>
+
+<p>The iOS app has been submitted to the Apple App Store. The web platform is live at web.cigarsnap.app. The B2B Partner Portal is operational. Go-to-market is underway with Reddit community targeting, influencer outreach, and a DFW hyper-local launch playbook.</p>
+
+<p>Total elapsed time from podcast inspiration to production platform: under 30 days. Solo founder.</p>
+
+<p>The web platform also runs on Stripe instead of Apple's in-app purchases — which means capturing 97% of subscription revenue versus 70% through the App Store. That's not a minor detail when you're building a real business.</p>
+
+<p>CigarSnap started as a hypothesis tested against a framework, validated with a $1.08 scrape, and built in a 48-hour sprint. The consumer app is live. The B2B model is ready. And every user who scans a cigar makes the whole thing more valuable.</p>
+
+<p>That's the kind of flywheel I like building.</p>
+    <div class="post-author">
+      <div class="post-author-avatar">M</div>
+      <div class="post-author-info">
+        <h4>Matt Cretzman</h4>
+        <p>Founder, Stormbreaker Digital · AI Systems Builder · Fractional CMO</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="post-nav">
+  <div class="container-narrow">
+    <div class="post-nav-inner">
+      <a href="/blog/" class="btn-ghost">← Back to Writing</a>
+      <a href="/work-with-me.html" class="btn-outline">Work With Me →</a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div><a href="/" class="footer-logo">Matt <span>Cretzman</span></a><div class="footer-tagline">Builder. GTM Engineer. AI Systems Architect.</div></div>
+      <div class="footer-links"><a href="/about.html">About</a><a href="/ventures/">Ventures</a><a href="/work-with-me.html">Work With Me</a><a href="/blog/">Writing</a><a href="https://stormbreakerdigital.com">Stormbreaker Digital</a><a href="https://linkedin.com/in/mattcretzman">LinkedIn</a></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2026 Matt Cretzman. All rights reserved.</div><div class="footer-copy">Built with Claude, Cursor, and Vercel.</div></div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', scrollY > 20));
+</script>
+</body>
+</html>
